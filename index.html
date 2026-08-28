@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BİM Barkod</title>
 
+  <script src="https://unpkg.com/html5-qrcode"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -66,10 +68,6 @@
       cursor: pointer;
     }
 
-    button:hover {
-      background: #c9000b;
-    }
-
     .urun {
       border: 1px solid #ddd;
       border-radius: 8px;
@@ -94,17 +92,15 @@
       padding: 15px;
     }
 
-    #kamera {
+    #reader {
       width: 100%;
-      border-radius: 10px;
       margin-top: 10px;
-      display: none;
     }
 
-    #kameraDurum {
+    #sonuc {
       text-align: center;
+      font-weight: bold;
       margin-top: 10px;
-      color: #777;
     }
   </style>
 </head>
@@ -118,20 +114,23 @@
   <div class="container">
 
     <div class="card">
+
       <h2>📷 Barkod Okut</h2>
 
-      <button onclick="kamerayiAc()">
+      <button onclick="barkodOkuyucuyuAc()">
         Kamerayı Aç
       </button>
 
-      <video id="kamera" autoplay playsinline></video>
+      <div id="reader"></div>
 
-      <div id="kameraDurum">
+      <div id="sonuc">
         Kamera kapalı
       </div>
+
     </div>
 
     <div class="card">
+
       <h2>Ürün Ara</h2>
 
       <input
@@ -140,9 +139,11 @@
         placeholder="Ürün adı veya barkod..."
         oninput="urunleriGoster()"
       >
+
     </div>
 
     <div class="card">
+
       <h2>Ürün Ekle</h2>
 
       <input
@@ -166,12 +167,15 @@
       <button onclick="urunEkle()">
         Ürün Ekle
       </button>
+
     </div>
 
     <div class="card">
+
       <h2>Ürünler</h2>
 
       <div id="urunListesi"></div>
+
     </div>
 
   </div>
@@ -182,7 +186,7 @@
       localStorage.getItem("bimBarkodUrunler")
     ) || [];
 
-    let kameraAkisi = null;
+    let okuyucu = null;
 
     function urunEkle() {
 
@@ -257,38 +261,47 @@
       });
     }
 
-    async function kamerayiAc() {
+    function barkodOkuyucuyuAc() {
 
-      const video = document.getElementById("kamera");
-      const durum = document.getElementById("kameraDurum");
-
-      try {
-
-        kameraAkisi =
-          await navigator.mediaDevices.getUserMedia({
-            video: {
-              facingMode: {
-                ideal: "environment"
-              }
-            },
-            audio: false
-          });
-
-        video.srcObject = kameraAkisi;
-        video.style.display = "block";
-
-        durum.textContent =
-          "Kamera açık 📷";
-
-      } catch (hata) {
-
-        durum.textContent =
-          "Kamera açılamadı. Kamera iznini kontrol et.";
-
-        alert(
-          "Kameraya erişim izni verilmedi veya kamera kullanılamıyor."
-        );
+      if (okuyucu) {
+        return;
       }
+
+      okuyucu = new Html5Qrcode("reader");
+
+      okuyucu.start(
+        { facingMode: "environment" },
+        {
+          fps: 10,
+          qrbox: {
+            width: 250,
+            height: 150
+          }
+        },
+
+        (barkod) => {
+
+          document.getElementById("arama").value = barkod;
+
+          document.getElementById("sonuc").textContent =
+            "Barkod okundu: " + barkod;
+
+          urunleriGoster();
+
+        },
+
+        () => {
+          // Barkod bulunamadığında burada hiçbir şey yapmıyoruz.
+        }
+
+      ).catch((hata) => {
+
+        document.getElementById("sonuc").textContent =
+          "Kamera açılamadı.";
+
+        okuyucu = null;
+
+      });
     }
 
     urunleriGoster();
