@@ -93,6 +93,19 @@
       color: #777;
       padding: 15px;
     }
+
+    #kamera {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    #kameraDurum {
+      text-align: center;
+      margin-top: 10px;
+      color: #777;
+    }
   </style>
 </head>
 
@@ -103,6 +116,20 @@
   </div>
 
   <div class="container">
+
+    <div class="card">
+      <h2>📷 Barkod Okut</h2>
+
+      <button onclick="kamerayiAc()">
+        Kamerayı Aç
+      </button>
+
+      <video id="kamera" autoplay playsinline></video>
+
+      <div id="kameraDurum">
+        Kamera kapalı
+      </div>
+    </div>
 
     <div class="card">
       <h2>Ürün Ara</h2>
@@ -154,6 +181,8 @@
     let urunler = JSON.parse(
       localStorage.getItem("bimBarkodUrunler")
     ) || [];
+
+    let kameraAkisi = null;
 
     function urunEkle() {
 
@@ -226,6 +255,40 @@
         `;
 
       });
+    }
+
+    async function kamerayiAc() {
+
+      const video = document.getElementById("kamera");
+      const durum = document.getElementById("kameraDurum");
+
+      try {
+
+        kameraAkisi =
+          await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: {
+                ideal: "environment"
+              }
+            },
+            audio: false
+          });
+
+        video.srcObject = kameraAkisi;
+        video.style.display = "block";
+
+        durum.textContent =
+          "Kamera açık 📷";
+
+      } catch (hata) {
+
+        durum.textContent =
+          "Kamera açılamadı. Kamera iznini kontrol et.";
+
+        alert(
+          "Kameraya erişim izni verilmedi veya kamera kullanılamıyor."
+        );
+      }
     }
 
     urunleriGoster();
