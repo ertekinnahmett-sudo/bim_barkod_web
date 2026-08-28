@@ -14,45 +14,21 @@
 
 <style>
 :root{--bg:#fff9f7;--text:#24201f;--red:#a75a50;--soft:#5e4d49;--pale:#fff0ed}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-button,input{font:inherit}button{cursor:pointer}
-.app{width:min(100%,520px);min-height:100vh;margin:auto;padding:28px 28px 38px}
-.screen{display:none}.screen.active{display:block}
-.mi{font-family:"Material Symbols Outlined";font-weight:normal;font-style:normal;vertical-align:middle}
-.home-title{text-align:center;font-size:30px;font-weight:400;margin:45px 0 0}
-.hero{min-height:500px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:34px;text-align:center}
-.scan-icon{font-size:130px;line-height:1;margin-bottom:34px}
-.brand{font-size:43px;margin:0;font-weight:700}
-.desc{font-size:23px;margin:24px 0 0}
-.home-buttons{display:grid;gap:20px}
-.home-btn{min-height:64px;border-radius:34px;font-size:20px;display:flex;align-items:center;justify-content:center;gap:12px}
-.scan-btn{border:1px solid #f0ded9;background:var(--pale);color:var(--red);box-shadow:0 3px 4px #41272228}
-.gallery-btn{border:1px solid #ecd5d0;background:#fff;color:var(--red)}
-.saved-btn{border:1.5px solid #766866;background:transparent;color:var(--red)}
-.top{min-height:54px;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;margin-bottom:24px}
-.top h1{text-align:center;font-size:23px;margin:0}
-.back{width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--text)}
-.card{padding:18px;border:1px solid #eee3e0;border-radius:22px;background:#fff;box-shadow:0 5px 18px #36262312}
-#reader{min-height:160px;overflow:hidden;border-radius:14px}
-#reader video{border-radius:12px}
-.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.cam-btn{min-height:50px;border:1px solid #e3d4d0;border-radius:14px;background:#fff7f5;color:var(--red);font-weight:700}
-.cam-btn.on{background:var(--red);border-color:var(--red);color:#fff}
-.status,.result{min-height:30px;margin-top:15px;color:var(--soft);text-align:center;line-height:1.45}
-.result-box{margin-top:16px;padding:18px;border-radius:16px;background:#fff4f1;text-align:left}
-.result-box strong{display:block;margin-bottom:9px;font-size:21px}
-.code{display:inline-block;margin-top:8px;color:var(--red);font-size:27px;font-weight:700}
-.add-card{display:none;margin-top:18px}.add-card.show{display:block}
-.add-card h2{margin:0 0 14px;font-size:20px}
-input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid #d8cbc7;border-radius:13px;outline-color:var(--red)}
-input[readonly]{background:#f7f0ee}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+button,input{font:inherit}button{cursor:pointer}.app{width:min(100%,520px);min-height:100vh;margin:auto;padding:28px 28px 38px}
+.screen{display:none}.screen.active{display:block}.mi{font-family:"Material Symbols Outlined";font-weight:normal;font-style:normal;vertical-align:middle}
+.home-title{text-align:center;font-size:30px;font-weight:400;margin:45px 0 0}.hero{min-height:500px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:34px;text-align:center}
+.scan-icon{font-size:130px;line-height:1;margin-bottom:34px}.brand{font-size:43px;margin:0;font-weight:700}.desc{font-size:23px;margin:24px 0 0}
+.home-buttons{display:grid;gap:20px}.home-btn{min-height:64px;border-radius:34px;font-size:20px;display:flex;align-items:center;justify-content:center;gap:12px}
+.scan-btn{border:1px solid #f0ded9;background:var(--pale);color:var(--red);box-shadow:0 3px 4px #41272228}.gallery-btn{border:1px solid #ecd5d0;background:#fff;color:var(--red)}.saved-btn{border:1.5px solid #766866;background:transparent;color:var(--red)}
+.top{min-height:54px;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;margin-bottom:24px}.top h1{text-align:center;font-size:23px;margin:0}.back{width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--text)}
+.card{padding:18px;border:1px solid #eee3e0;border-radius:22px;background:#fff;box-shadow:0 5px 18px #36262312}#reader{min-height:160px;overflow:hidden;border-radius:14px}#reader video{border-radius:12px}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.cam-btn{min-height:50px;border:1px solid #e3d4d0;border-radius:14px;background:#fff7f5;color:var(--red);font-weight:700}.cam-btn.on{background:var(--red);border-color:var(--red);color:#fff}
+.status,.result{min-height:30px;margin-top:15px;color:var(--soft);text-align:center;line-height:1.45}.result-box{margin-top:16px;padding:18px;border-radius:16px;background:#fff4f1;text-align:left}.result-box strong{display:block;margin-bottom:9px;font-size:21px}.code{display:inline-block;margin-top:8px;color:var(--red);font-size:27px;font-weight:700}
+.manual-card,.add-card{display:none;margin-top:18px}.manual-card.show,.add-card.show{display:block}.manual-card h2,.add-card h2{margin:0 0 10px;font-size:20px}
+input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid #d8cbc7;border-radius:13px;outline-color:var(--red)}input[readonly]{background:#f7f0ee}
 .save{width:100%;min-height:52px;margin-top:10px;border:0;border-radius:14px;background:var(--red);color:#fff;font-weight:700}
-.list{display:grid;gap:11px}
-.product{padding:15px;border:1px solid #eadeda;border-radius:15px;background:#fffdfc}
-.product strong{display:block;margin-bottom:8px;font-size:18px}
-.info{color:var(--soft);line-height:1.5}
-.empty{padding:32px 12px;text-align:center;color:var(--soft)}
+.list{display:grid;gap:11px}.product{padding:15px;border:1px solid #eadeda;border-radius:15px;background:#fffdfc}.product strong{display:block;margin-bottom:8px;font-size:18px}.info{color:var(--soft);line-height:1.5}.empty{padding:32px 12px;text-align:center;color:var(--soft)}
 @media(max-width:390px){.app{padding:20px}.hero{min-height:445px}.brand{font-size:37px}.desc{font-size:20px}}
 </style>
 </head>
@@ -70,17 +46,9 @@ input[readonly]{background:#f7f0ee}
   </div>
 
   <div class="home-buttons">
-    <button class="home-btn scan-btn" onclick="openScan()">
-      <span class="mi">photo_camera</span>Barkod Tara
-    </button>
-
-    <button class="home-btn gallery-btn" onclick="document.getElementById('galleryInput').click()">
-      <span class="mi">photo_library</span>Galeriden Tara
-    </button>
-
-    <button class="home-btn saved-btn" onclick="openSaved()">
-      <span class="mi">format_list_bulleted</span>Kayıtlı Barkodlar
-    </button>
+    <button class="home-btn scan-btn" onclick="openScan()"><span class="mi">photo_camera</span>Barkod Tara</button>
+    <button class="home-btn gallery-btn" onclick="document.getElementById('galleryInput').click()"><span class="mi">photo_library</span>Galeriden Tara</button>
+    <button class="home-btn saved-btn" onclick="openSaved()"><span class="mi">format_list_bulleted</span>Kayıtlı Barkodlar</button>
   </div>
 
   <input id="galleryInput" type="file" accept="image/*" hidden onchange="scanGallery(event)">
@@ -97,17 +65,18 @@ input[readonly]{background:#f7f0ee}
     <div id="reader"></div>
 
     <div class="controls">
-      <button id="flashBtn" class="cam-btn" onclick="toggleFlash()">
-        <span class="mi">flash_on</span>Flaş Aç
-      </button>
-
-      <button class="cam-btn" onclick="restartCamera()">
-        <span class="mi">refresh</span>Yeniden Tara
-      </button>
+      <button id="flashBtn" class="cam-btn" onclick="toggleFlash()"><span class="mi">flash_on</span>Flaş Aç</button>
+      <button class="cam-btn" onclick="restartCamera()"><span class="mi">refresh</span>Yeniden Tara</button>
     </div>
 
     <div id="cameraStatus" class="status"></div>
     <div id="scanResult" class="result"></div>
+  </div>
+
+  <div id="manualCard" class="card manual-card">
+    <h2>Barkodu Elle Gir</h2>
+    <input id="manualBarcode" inputmode="numeric" placeholder="Barkod numarasını yaz">
+    <button class="save" onclick="searchManualBarcode()">Barkodu Ara</button>
   </div>
 
   <div id="addCard" class="card add-card">
@@ -148,30 +117,14 @@ const app=initializeApp({
 });
 
 const db=getFirestore(app);
-
 let products=JSON.parse(localStorage.getItem("bimBarkodUrunler"))||[];
-let scanner=null;
-let flash=false;
-let lastBarcode="";
+let scanner=null,flash=false,lastBarcode="",manualTimer=null;
 
-function safe(value){
-  return String(value||"")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-function localSave(){
-  localStorage.setItem("bimBarkodUrunler",JSON.stringify(products));
-}
+const safe=value=>String(value||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+const localSave=()=>localStorage.setItem("bimBarkodUrunler",JSON.stringify(products));
 
 function show(id){
-  document.querySelectorAll(".screen").forEach((screen)=>{
-    screen.classList.remove("active");
-  });
-
+  document.querySelectorAll(".screen").forEach(screen=>screen.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   window.scrollTo(0,0);
 }
@@ -179,14 +132,13 @@ function show(id){
 async function loadFirebase(){
   try{
     const snapshot=await getDocs(collection(db,"barkodlar"));
-    const merged=new Map(products.map((product)=>[product.barkod,product]));
+    const merged=new Map(products.map(product=>[product.barkod,product]));
 
-    snapshot.docs.forEach((documentData)=>{
-      const data=documentData.data();
-
-      merged.set(data.barkod||documentData.id,{
+    snapshot.docs.forEach(item=>{
+      const data=item.data();
+      merged.set(data.barkod||item.id,{
         ad:data.ad||data.urunAdi||"Ürün adı girilmemiş",
-        barkod:data.barkod||documentData.id,
+        barkod:data.barkod||item.id,
         kod:data.kisakod||data.kisaKod||data.kod||""
       });
     });
@@ -194,87 +146,81 @@ async function loadFirebase(){
     products=[...merged.values()];
     localSave();
     renderProducts();
-
-  }catch(error){
-    console.error(error);
-  }
+  }catch(error){console.error(error)}
 }
 
 window.goHome=async()=>{
   await stopCamera();
+  clearTimeout(manualTimer);
+  document.getElementById("manualCard").classList.remove("show");
   document.getElementById("addCard").classList.remove("show");
   document.getElementById("scanResult").innerHTML="";
   show("home");
 };
 
 window.openScan=async()=>{
+  document.getElementById("manualCard").classList.remove("show");
   document.getElementById("addCard").classList.remove("show");
   document.getElementById("scanResult").innerHTML="";
+  document.getElementById("manualBarcode").value="";
   show("scan");
   await startCamera();
 };
 
-window.openSaved=()=>{
-  renderProducts();
-  show("saved");
-};
+window.openSaved=()=>{renderProducts();show("saved")};
 
 window.renderProducts=()=>{
-  const query=document.getElementById("search").value.toLowerCase().trim();
-
-  const list=products.filter((product)=>
-    String(product.ad).toLowerCase().includes(query)||
-    String(product.barkod).includes(query)||
-    String(product.kod).includes(query)
+  const q=document.getElementById("search").value.toLowerCase().trim();
+  const list=products.filter(product=>
+    String(product.ad).toLowerCase().includes(q)||
+    String(product.barkod).includes(q)||
+    String(product.kod).includes(q)
   );
 
   document.getElementById("productList").innerHTML=list.length
-    ? list.map((product)=>`
+    ?list.map(product=>`
       <article class="product">
         <strong>${safe(product.ad)}</strong>
-        <div class="info">
-          Barkod: ${safe(product.barkod)}<br>
-          Kısa kod: <b>${safe(product.kod)}</b>
-        </div>
+        <div class="info">Barkod: ${safe(product.barkod)}<br>Kısa kod: <b>${safe(product.kod)}</b></div>
       </article>
     `).join("")
-    : '<div class="empty">Henüz gösterilecek barkod yok.</div>';
+    :'<div class="empty">Henüz gösterilecek barkod yok.</div>';
 };
 
 function showResult(barcode){
-  const product=products.find((item)=>item.barkod===barcode);
+  const product=products.find(item=>item.barkod===barcode);
   const result=document.getElementById("scanResult");
   const addCard=document.getElementById("addCard");
 
   if(product){
     addCard.classList.remove("show");
-
     result.innerHTML=`
       <div class="result-box">
         <strong>✓ ${safe(product.ad)}</strong>
         Barkod: ${safe(product.barkod)}<br>
-        Kısa kasa kodu:
-        <div class="code">${safe(product.kod)}</div>
-      </div>
-    `;
-
+        Kısa kasa kodu:<div class="code">${safe(product.kod)}</div>
+      </div>`;
     return;
   }
 
   document.getElementById("newBarcode").value=barcode;
   document.getElementById("productName").value="";
   document.getElementById("shortCode").value="";
-
-  result.innerHTML=`
-    <div class="result-box">
-      <strong>Bu barkod kayıtlı değil</strong>
-      Barkod: ${safe(barcode)}
-    </div>
-  `;
-
+  result.innerHTML=`<div class="result-box"><strong>Bu barkod kayıtlı değil</strong>Barkod: ${safe(barcode)}</div>`;
   addCard.classList.add("show");
   document.getElementById("productName").focus();
 }
+
+window.searchManualBarcode=()=>{
+  const barcode=document.getElementById("manualBarcode").value.trim();
+
+  if(!barcode){
+    alert("Lütfen barkod numarasını yaz.");
+    return;
+  }
+
+  showResult(barcode);
+};
 
 window.saveProduct=async()=>{
   const barkod=document.getElementById("newBarcode").value.trim();
@@ -287,20 +233,13 @@ window.saveProduct=async()=>{
   }
 
   try{
-    await setDoc(
-      doc(db,"barkodlar",barkod),
-      {ad,barkod,kisakod:kod,tarih:serverTimestamp()},
-      {merge:true}
-    );
+    await setDoc(doc(db,"barkodlar",barkod),{ad,barkod,kisakod:kod,tarih:serverTimestamp()},{merge:true});
 
     const product={ad,barkod,kod};
-    const index=products.findIndex((item)=>item.barkod===barkod);
+    const index=products.findIndex(item=>item.barkod===barkod);
 
-    if(index<0){
-      products.push(product);
-    }else{
-      products[index]=product;
-    }
+    if(index<0)products.push(product);
+    else products[index]=product;
 
     localSave();
     renderProducts();
@@ -324,18 +263,14 @@ async function startCamera(){
 
     await scanner.start(
       {facingMode:"environment"},
-      {
-        fps:10,
-        qrbox:{width:300,height:160},
-        aspectRatio:1.333333,
-        disableFlip:true
-      },
-      async(code)=>{
-        if(code===lastBarcode)return;
+      {fps:10,qrbox:{width:300,height:160},aspectRatio:1.333333,disableFlip:true},
+      async barcode=>{
+        if(barcode===lastBarcode)return;
 
-        lastBarcode=code;
+        lastBarcode=barcode;
         await stopCamera();
-        showResult(code);
+        clearTimeout(manualTimer);
+        showResult(barcode);
         status.textContent="Barkod okundu.";
       },
       ()=>{}
@@ -343,10 +278,16 @@ async function startCamera(){
 
     status.textContent="Barkodu çerçevenin ortasında tut.";
 
+    manualTimer=setTimeout(()=>{
+      document.getElementById("manualCard").classList.add("show");
+    },2000);
+
   }catch(error){
     console.error(error);
-    status.textContent="Kamera açılamadı. Kamera iznini kontrol et.";
+    status.textContent="Kamera açılamadı.";
     scanner=null;
+
+    document.getElementById("manualCard").classList.add("show");
   }
 }
 
@@ -361,26 +302,25 @@ async function stopCamera(){
   try{
     await active.stop();
     await active.clear();
-  }catch(error){
-    console.warn(error);
-  }
+  }catch(error){console.warn(error)}
 }
 
 window.restartCamera=async()=>{
   await stopCamera();
+  clearTimeout(manualTimer);
   lastBarcode="";
   document.getElementById("scanResult").innerHTML="";
   document.getElementById("addCard").classList.remove("show");
+  document.getElementById("manualCard").classList.remove("show");
   await startCamera();
 };
 
 function updateFlashButton(){
   const button=document.getElementById("flashBtn");
-
   button.classList.toggle("on",flash);
   button.innerHTML=flash
-    ? '<span class="mi">flash_off</span>Flaş Kapat'
-    : '<span class="mi">flash_on</span>Flaş Aç';
+    ?'<span class="mi">flash_off</span>Flaş Kapat'
+    :'<span class="mi">flash_on</span>Flaş Aç';
 }
 
 window.toggleFlash=async()=>{
@@ -399,11 +339,7 @@ window.toggleFlash=async()=>{
     }
 
     flash=!flash;
-
-    await track.applyConstraints({
-      advanced:[{torch:flash}]
-    });
-
+    await track.applyConstraints({advanced:[{torch:flash}]});
     updateFlashButton();
     status.textContent=flash?"Flaş açık.":"Flaş kapalı.";
 
@@ -414,13 +350,15 @@ window.toggleFlash=async()=>{
   }
 };
 
-window.scanGallery=async(event)=>{
+window.scanGallery=async event=>{
   const file=event.target.files?.[0];
   event.target.value="";
 
   if(!file)return;
 
   await stopCamera();
+  clearTimeout(manualTimer);
+  document.getElementById("manualCard").classList.add("show");
   document.getElementById("addCard").classList.remove("show");
   document.getElementById("scanResult").innerHTML="";
   show("scan");
@@ -434,32 +372,18 @@ window.scanGallery=async(event)=>{
     {
       src:imageUrl,
       numOfWorkers:0,
-      inputStream:{
-        size:1200
-      },
-      locator:{
-        patchSize:"medium",
-        halfSample:false
-      },
-      decoder:{
-        readers:[
-          "ean_reader",
-          "ean_8_reader",
-          "upc_reader",
-          "upc_e_reader",
-          "code_128_reader",
-          "code_39_reader"
-        ]
-      }
+      inputStream:{size:1200},
+      locator:{patchSize:"medium",halfSample:false},
+      decoder:{readers:["ean_reader","ean_8_reader","upc_reader","upc_e_reader","code_128_reader","code_39_reader"]}
     },
-    (result)=>{
+    result=>{
       URL.revokeObjectURL(imageUrl);
 
       if(result?.codeResult?.code){
         showResult(result.codeResult.code);
         status.textContent="Fotoğraftaki barkod okundu.";
       }else{
-        status.textContent="Barkod okunamadı. Barkodun tamamının net göründüğü bir fotoğraf seç.";
+        status.textContent="Barkod okunamadı. Elle giriş yapabilirsin.";
       }
     }
   );
