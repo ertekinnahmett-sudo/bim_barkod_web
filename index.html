@@ -151,13 +151,20 @@
 
   <script>
 
-    let urunler = [];
+    let urunler = JSON.parse(
+      localStorage.getItem("bimBarkodUrunler")
+    ) || [];
 
     function urunEkle() {
 
-      const ad = document.getElementById("urunAdi").value.trim();
-      const barkod = document.getElementById("barkod").value.trim();
-      const kod = document.getElementById("kisaKod").value.trim();
+      const ad =
+        document.getElementById("urunAdi").value.trim();
+
+      const barkod =
+        document.getElementById("barkod").value.trim();
+
+      const kod =
+        document.getElementById("kisaKod").value.trim();
 
       if (!ad || !barkod || !kod) {
         alert("Lütfen bütün alanları doldur.");
@@ -170,6 +177,11 @@
         kod: kod
       });
 
+      localStorage.setItem(
+        "bimBarkodUrunler",
+        JSON.stringify(urunler)
+      );
+
       document.getElementById("urunAdi").value = "";
       document.getElementById("barkod").value = "";
       document.getElementById("kisaKod").value = "";
@@ -179,11 +191,14 @@
 
     function urunleriGoster() {
 
-      const liste = document.getElementById("urunListesi");
-      const arama = document
-        .getElementById("arama")
-        .value
-        .toLowerCase();
+      const liste =
+        document.getElementById("urunListesi");
+
+      const arama =
+        document
+          .getElementById("arama")
+          .value
+          .toLowerCase();
 
       liste.innerHTML = "";
 
