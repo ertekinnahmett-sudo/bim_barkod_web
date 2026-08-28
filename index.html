@@ -7,137 +7,386 @@
 
   <script src="https://unpkg.com/html5-qrcode"></script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
+
   <style>
+    :root {
+      --zemin: #fff9f7;
+      --metin: #24201f;
+      --soluk-metin: #5e4d49;
+      --vurgu: #a75a50;
+      --pembe: #fff0ed;
+      --kenar: #766866;
+      --kart: #ffffff;
+      --hata: #b3372e;
+    }
+
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: Arial, sans-serif;
-      background: #f4f5f7;
-      color: #222;
+      color: var(--metin);
+      background: var(--zemin);
     }
 
-    .header {
-      background: #e30613;
-      color: white;
-      padding: 20px;
+    button, input { font: inherit; }
+
+    button {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .uygulama {
+      width: min(100%, 520px);
+      min-height: 100vh;
+      margin: auto;
+      padding: 28px 28px 38px;
+    }
+
+    .ekran { display: none; }
+    .ekran.aktif { display: block; }
+
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      vertical-align: middle;
+    }
+
+    /* ANA EKRAN */
+    .ana-baslik {
+      margin: 45px 0 0;
       text-align: center;
-      font-size: 25px;
-      font-weight: bold;
+      font-size: 30px;
+      font-weight: 400;
     }
 
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 15px;
+    .tanitim {
+      min-height: 555px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 34px;
+      text-align: center;
     }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    .buyuk-simge {
+      margin-bottom: 34px;
+      font-size: 130px;
+      line-height: 1;
     }
 
-    h2 { margin-top: 0; }
+    .marka {
+      margin: 0;
+      font-size: 43px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .aciklama {
+      margin: 24px 0 0;
+      font-size: 23px;
+      line-height: 1.35;
+    }
+
+    .ana-butonlar {
+      display: grid;
+      gap: 34px;
+    }
+
+    .ana-buton {
+      min-height: 68px;
+      border-radius: 36px;
+      font-size: 21px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: transform .15s ease, background .15s ease;
+    }
+
+    .ana-buton:active { transform: scale(.98); }
+
+    .ana-buton.tara {
+      border: 1px solid #f0ded9;
+      color: var(--vurgu);
+      background: var(--pembe);
+      box-shadow: 0 3px 4px rgba(65, 39, 34, .16);
+    }
+
+    .ana-buton.kayitli {
+      border: 1.5px solid var(--kenar);
+      color: var(--vurgu);
+      background: transparent;
+    }
+
+    /* İÇ EKRANLAR */
+    .ust-cubuk {
+      min-height: 54px;
+      display: grid;
+      grid-template-columns: 48px 1fr 48px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .ust-cubuk h1 {
+      margin: 0;
+      text-align: center;
+      font-size: 23px;
+    }
+
+    .geri-buton, .bos-alan {
+      width: 44px;
+      height: 44px;
+    }
+
+    .geri-buton {
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--metin);
+    }
+
+    .geri-buton:hover { background: #f6eae7; }
+
+    .kamerakart, .liste-kart, .ekleme-kart {
+      background: var(--kart);
+      border: 1px solid #eee3e0;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 5px 18px rgba(54, 38, 35, .07);
+    }
+
+    #reader {
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    #reader video { border-radius: 12px; }
+
+    .kamera-kontrolleri {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .kamera-buton {
+      min-height: 50px;
+      border-radius: 14px;
+      border: 1px solid #e3d4d0;
+      background: #fff7f5;
+      color: var(--vurgu);
+      font-weight: 700;
+    }
+
+    .kamera-buton.acik {
+      background: var(--vurgu);
+      color: white;
+      border-color: var(--vurgu);
+    }
+
+    .durum, .sonuc {
+      min-height: 30px;
+      margin-top: 15px;
+      text-align: center;
+      color: var(--soluk-metin);
+      line-height: 1.45;
+    }
+
+    .sonuc .bulundu {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 16px;
+      background: #fff4f1;
+      text-align: left;
+    }
+
+    .sonuc .bulundu strong {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 21px;
+    }
+
+    .kod {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--vurgu);
+      font-size: 27px;
+      font-weight: 700;
+    }
+
+    .ekleme-kart {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .ekleme-kart.gorunur { display: block; }
+
+    .ekleme-kart h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+    }
 
     input {
       width: 100%;
-      padding: 14px;
+      min-height: 52px;
       margin: 7px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
+      padding: 12px 14px;
+      border: 1px solid #d8cbc7;
+      border-radius: 13px;
+      color: var(--metin);
+      background: white;
+      outline-color: var(--vurgu);
     }
 
-    button {
+    input[readonly] {
+      background: #f7f0ee;
+      color: #6b5d59;
+    }
+
+    .kaydet-buton {
       width: 100%;
-      padding: 14px;
+      min-height: 52px;
       margin-top: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #e30613;
+      border: 0;
+      border-radius: 14px;
+      background: var(--vurgu);
       color: white;
+      font-weight: 700;
       font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
     }
 
-    .yesil { background: #198754; }
+    .arama {
+      margin: 0 0 16px;
+      padding-left: 16px;
+    }
+
+    .urun-listesi {
+      display: grid;
+      gap: 11px;
+    }
 
     .urun {
-      border: 1px solid #ddd;
-      border-radius: 8px;
+      border: 1px solid #eadeda;
+      border-radius: 15px;
       padding: 15px;
-      margin-top: 10px;
+      background: #fffdfc;
     }
 
     .urun strong {
       display: block;
-      font-size: 19px;
-      margin-bottom: 7px;
+      margin-bottom: 8px;
+      font-size: 18px;
     }
 
-    .kod {
-      color: #e30613;
-      font-size: 20px;
-      font-weight: bold;
+    .urun-bilgi {
+      color: var(--soluk-metin);
+      line-height: 1.5;
     }
 
-    .sonuc {
+    .bos-liste {
+      padding: 32px 12px;
       text-align: center;
-      margin-top: 15px;
-      font-weight: bold;
+      color: var(--soluk-metin);
     }
 
-    .bulunamadi {
-      color: #e30613;
-      text-align: center;
-      padding: 10px;
-    }
-
-    #reader {
-      width: 100%;
-      margin-top: 10px;
+    @media (max-width: 390px) {
+      .uygulama { padding: 20px 20px 30px; }
+      .ana-baslik { margin-top: 30px; }
+      .tanitim { min-height: 480px; }
+      .marka { font-size: 37px; }
+      .aciklama { font-size: 20px; }
+      .ana-butonlar { gap: 22px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="header">🛒 BİM Barkod</div>
+  <main class="uygulama">
+    <section id="anaEkran" class="ekran aktif">
+      <h1 class="ana-baslik">BİM Barkod</h1>
 
-  <div class="container">
-    <div class="card">
-      <h2>📷 Barkod Okut</h2>
-      <button onclick="kamerayiAc()">Kamerayı Aç</button>
-      <div id="reader"></div>
-      <div id="sonuc" class="sonuc">Ürünler yükleniyor...</div>
-    </div>
+      <div class="tanitim">
+        <span class="material-symbols-outlined buyuk-simge">qr_code_scanner</span>
+        <h2 class="marka">BİM Barkod</h2>
+        <p class="aciklama">Barkod okut, kısa kodunu kaydet.</p>
+      </div>
 
-    <div class="card">
-      <h2>🔎 Ürün Ara</h2>
-      <input
-        type="text"
-        id="arama"
-        placeholder="Ürün adı veya barkod..."
-        oninput="urunleriGoster()"
-      >
-    </div>
+      <div class="ana-butonlar">
+        <button class="ana-buton tara" onclick="taramaEkraniniAc()">
+          <span class="material-symbols-outlined">photo_camera</span>
+          Barkod Tara
+        </button>
 
-    <div class="card">
-      <h2>➕ Ürün Ekle</h2>
-      <input type="text" id="urunAdi" placeholder="Ürün adı">
-      <input type="text" id="barkod" placeholder="Uzun barkod">
-      <input type="text" id="kisaKod" placeholder="Kısa kasa kodu">
-      <button onclick="urunEkle()">Ürün Ekle</button>
-    </div>
+        <button class="ana-buton kayitli" onclick="kayitliEkraniniAc()">
+          <span class="material-symbols-outlined">format_list_bulleted</span>
+          Kayıtlı Barkodlar
+        </button>
+      </div>
+    </section>
 
-    <div class="card">
-      <h2>📦 Ürünler</h2>
-      <div id="urunListesi"></div>
-    </div>
-  </div>
+    <section id="taramaEkran" class="ekran">
+      <div class="ust-cubuk">
+        <button class="geri-buton" onclick="anaEkranaDon()" aria-label="Geri">
+          <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <h1>Barkod Tara</h1>
+        <span class="bos-alan"></span>
+      </div>
+
+      <div class="kamerakart">
+        <div id="reader"></div>
+
+        <div class="kamera-kontrolleri">
+          <button id="flaşButon" class="kamera-buton" onclick="flasiDegistir()">
+            <span class="material-symbols-outlined">flash_on</span>
+            Flaş Aç
+          </button>
+
+          <button class="kamera-buton" onclick="kamerayiYenidenBaslat()">
+            <span class="material-symbols-outlined">refresh</span>
+            Yeniden Tara
+          </button>
+        </div>
+
+        <div id="kameraDurum" class="durum">Kamera hazırlanıyor...</div>
+        <div id="taramaSonuc" class="sonuc"></div>
+      </div>
+
+      <div id="eklemeKarti" class="ekleme-kart">
+        <h2>Yeni barkodu kaydet</h2>
+        <input id="yeniBarkod" type="text" readonly>
+        <input id="urunAdi" type="text" placeholder="Ürün adı">
+        <input id="kisaKod" type="text" placeholder="Kısa kasa kodu">
+        <button class="kaydet-buton" onclick="urunEkle()">Kaydet</button>
+      </div>
+    </section>
+
+    <section id="kayitliEkran" class="ekran">
+      <div class="ust-cubuk">
+        <button class="geri-buton" onclick="anaEkranaDon()" aria-label="Geri">
+          <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <h1>Kayıtlı Barkodlar</h1>
+        <span class="bos-alan"></span>
+      </div>
+
+      <div class="liste-kart">
+        <input
+          id="arama"
+          class="arama"
+          type="text"
+          placeholder="Barkod veya ürün ara"
+          oninput="urunleriGoster()"
+        >
+        <div id="urunListesi" class="urun-listesi"></div>
+      </div>
+    </section>
+  </main>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -162,20 +411,12 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    let urunler = JSON.parse(
-      localStorage.getItem("bimBarkodUrunler")
-    ) || [];
-
+    let urunler = JSON.parse(localStorage.getItem("bimBarkodUrunler")) || [];
     let okuyucu = null;
+    let flashAcik = false;
+    let sonOkunanBarkod = "";
 
-    function kaydetYerel() {
-      localStorage.setItem(
-        "bimBarkodUrunler",
-        JSON.stringify(urunler)
-      );
-    }
-
-    function guvenliMetin(metin) {
+    function metniGuvenliYaz(metin) {
       return String(metin || "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
@@ -184,11 +425,24 @@
         .replaceAll("'", "&#039;");
     }
 
+    function yereldeKaydet() {
+      localStorage.setItem("bimBarkodUrunler", JSON.stringify(urunler));
+    }
+
+    function ekraniGoster(ekranId) {
+      document.querySelectorAll(".ekran").forEach((ekran) => {
+        ekran.classList.remove("aktif");
+      });
+
+      document.getElementById(ekranId).classList.add("aktif");
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+
     async function firestoredenYukle() {
       try {
-        const sonuc = await getDocs(collection(db, "barkodlar"));
+        const snapshot = await getDocs(collection(db, "barkodlar"));
 
-        const firebaseUrunler = sonuc.docs.map((belge) => {
+        const firebaseUrunler = snapshot.docs.map((belge) => {
           const veri = belge.data();
 
           return {
@@ -198,38 +452,111 @@
           };
         });
 
-        const birlesikUrunler = new Map();
-
-        urunler.forEach((urun) => {
-          birlesikUrunler.set(urun.barkod, urun);
-        });
+        const birlesik = new Map(urunler.map((urun) => [urun.barkod, urun]));
 
         firebaseUrunler.forEach((urun) => {
-          birlesikUrunler.set(urun.barkod, urun);
+          birlesik.set(urun.barkod, urun);
         });
 
-        urunler = [...birlesikUrunler.values()];
-        kaydetYerel();
+        urunler = [...birlesik.values()];
+        yereldeKaydet();
         urunleriGoster();
 
-        document.getElementById("sonuc").textContent =
-          `${firebaseUrunler.length} ürün Firebase'den yüklendi.`;
-
       } catch (hata) {
-        console.error(hata);
-
-        document.getElementById("sonuc").textContent =
-          "Firebase ürünleri yüklenemedi. İnternet bağlantını kontrol et.";
+        console.error("Firebase yükleme hatası:", hata);
       }
     }
 
+    window.anaEkranaDon = async function () {
+      await kamerayiKapat();
+      document.getElementById("eklemeKarti").classList.remove("gorunur");
+      document.getElementById("taramaSonuc").innerHTML = "";
+      ekraniGoster("anaEkran");
+    };
+
+    window.taramaEkraniniAc = async function () {
+      document.getElementById("eklemeKarti").classList.remove("gorunur");
+      document.getElementById("taramaSonuc").innerHTML = "";
+      ekraniGoster("taramaEkran");
+      await kamerayiAc();
+    };
+
+    window.kayitliEkraniniAc = function () {
+      urunleriGoster();
+      ekraniGoster("kayitliEkran");
+    };
+
+    window.urunleriGoster = function () {
+      const liste = document.getElementById("urunListesi");
+      const aramaAlani = document.getElementById("arama");
+      const arama = aramaAlani ? aramaAlani.value.toLowerCase().trim() : "";
+
+      const bulunanlar = urunler.filter((urun) =>
+        String(urun.ad || "").toLowerCase().includes(arama) ||
+        String(urun.barkod || "").includes(arama) ||
+        String(urun.kod || "").includes(arama)
+      );
+
+      if (bulunanlar.length === 0) {
+        liste.innerHTML = `
+          <div class="bos-liste">
+            Henüz gösterilecek barkod yok.
+          </div>
+        `;
+        return;
+      }
+
+      liste.innerHTML = bulunanlar.map((urun) => `
+        <article class="urun">
+          <strong>${metniGuvenliYaz(urun.ad)}</strong>
+          <div class="urun-bilgi">
+            Barkod: ${metniGuvenliYaz(urun.barkod)}<br>
+            Kısa kod: <b>${metniGuvenliYaz(urun.kod)}</b>
+          </div>
+        </article>
+      `).join("");
+    };
+
+    function barkodSonucunuGoster(barkod) {
+      const urun = urunler.find((kayit) => kayit.barkod === barkod);
+      const sonucAlani = document.getElementById("taramaSonuc");
+      const eklemeKarti = document.getElementById("eklemeKarti");
+
+      if (urun) {
+        eklemeKarti.classList.remove("gorunur");
+        sonucAlani.innerHTML = `
+          <div class="bulundu">
+            <strong>✓ ${metniGuvenliYaz(urun.ad)}</strong>
+            Barkod: ${metniGuvenliYaz(urun.barkod)}<br>
+            Kısa kasa kodu:
+            <div class="kod">${metniGuvenliYaz(urun.kod)}</div>
+          </div>
+        `;
+        return;
+      }
+
+      document.getElementById("yeniBarkod").value = barkod;
+      document.getElementById("urunAdi").value = "";
+      document.getElementById("kisaKod").value = "";
+
+      sonucAlani.innerHTML = `
+        <div class="bulundu">
+          <strong>Bu barkod kayıtlı değil</strong>
+          Barkod: ${metniGuvenliYaz(barkod)}
+        </div>
+      `;
+
+      eklemeKarti.classList.add("gorunur");
+      document.getElementById("urunAdi").focus();
+    }
+
     window.urunEkle = async function () {
+      const barkod = document.getElementById("yeniBarkod").value.trim();
       const ad = document.getElementById("urunAdi").value.trim();
-      const barkod = document.getElementById("barkod").value.trim();
       const kod = document.getElementById("kisaKod").value.trim();
 
-      if (!ad || !barkod || !kod) {
-        alert("Lütfen bütün alanları doldur.");
+      if (!ad || !kod) {
+        alert("Lütfen ürün adını ve kısa kasa kodunu yaz.");
         return;
       }
 
@@ -239,135 +566,141 @@
         await setDoc(
           doc(db, "barkodlar", barkod),
           {
-            ad: ad,
-            barkod: barkod,
+            ad,
+            barkod,
             kisakod: kod,
             tarih: serverTimestamp()
           },
           { merge: true }
         );
 
-        const eskiUrununSiraNo = urunler.findIndex(
+        const mevcutSira = urunler.findIndex(
           (urun) => urun.barkod === barkod
         );
 
-        if (eskiUrununSiraNo >= 0) {
-          urunler[eskiUrununSiraNo] = yeniUrun;
+        if (mevcutSira >= 0) {
+          urunler[mevcutSira] = yeniUrun;
         } else {
           urunler.push(yeniUrun);
         }
 
-        kaydetYerel();
-
-        document.getElementById("urunAdi").value = "";
-        document.getElementById("barkod").value = "";
-        document.getElementById("kisaKod").value = "";
-
+        yereldeKaydet();
         urunleriGoster();
 
-        document.getElementById("sonuc").textContent =
-          "Ürün Firebase'e kaydedildi.";
+        document.getElementById("eklemeKarti").classList.remove("gorunur");
+        barkodSonucunuGoster(barkod);
 
       } catch (hata) {
-        console.error(hata);
+        console.error("Firebase kayıt hatası:", hata);
         alert("Ürün Firebase'e kaydedilemedi.");
       }
     };
 
-    window.urunleriGoster = function () {
-      const liste = document.getElementById("urunListesi");
-      const arama = document.getElementById("arama").value.toLowerCase();
-
-      liste.innerHTML = "";
-
-      const bulunanlar = urunler.filter((urun) =>
-        String(urun.ad || "").toLowerCase().includes(arama) ||
-        String(urun.barkod || "").includes(arama) ||
-        String(urun.kod || "").includes(arama)
-      );
-
-      if (bulunanlar.length === 0) {
-        liste.innerHTML =
-          '<div class="bulunamadi">Ürün bulunamadı.</div>';
-        return;
-      }
-
-      bulunanlar.forEach((urun) => {
-        liste.innerHTML += `
-          <div class="urun">
-            <strong>${guvenliMetin(urun.ad)}</strong>
-            Barkod: ${guvenliMetin(urun.barkod)}<br>
-            Kısa Kod:
-            <span class="kod">${guvenliMetin(urun.kod)}</span>
-          </div>
-        `;
-      });
-    };
-
-    function barkodBulundu(barkod) {
-      const urun = urunler.find((urun) => urun.barkod === barkod);
-
-      if (urun) {
-        document.getElementById("sonuc").innerHTML = `
-          <div class="urun">
-            <strong>✅ ${guvenliMetin(urun.ad)}</strong>
-            Barkod: ${guvenliMetin(urun.barkod)}<br>
-            Kısa Kasa Kodu:
-            <div class="kod">${guvenliMetin(urun.kod)}</div>
-          </div>
-        `;
-        return;
-      }
-
-      document.getElementById("sonuc").innerHTML = `
-        <div class="urun">
-          <strong>❌ Barkod bulunamadı</strong>
-          <div style="margin-top:10px;">${guvenliMetin(barkod)}</div>
-          <button
-            class="yesil"
-            onclick="bulunamayanUrunuEkle('${barkod}')"
-          >
-            ➕ Bu Ürünü Ekle
-          </button>
-        </div>
-      `;
-    }
-
-    window.bulunamayanUrunuEkle = function (barkod) {
-      document.getElementById("barkod").value = barkod;
-      document.getElementById("urunAdi").focus();
-
-      window.scrollTo({
-        top: document.getElementById("urunAdi").offsetTop - 100,
-        behavior: "smooth"
-      });
-    };
-
-    window.kamerayiAc = function () {
+    async function kamerayiAc() {
       if (okuyucu) return;
 
-      okuyucu = new Html5Qrcode("reader");
+      const durum = document.getElementById("kameraDurum");
+      durum.textContent = "Kamera açılıyor...";
 
-      okuyucu.start(
-        { facingMode: "environment" },
-        {
-          fps: 10,
-          qrbox: { width: 280, height: 160 }
-        },
-        (barkod) => {
-          document.getElementById("arama").value = barkod;
-          barkodBulundu(barkod);
-          urunleriGoster();
-        },
-        () => {}
-      ).catch(() => {
-        document.getElementById("sonuc").textContent =
-          "Kamera açılamadı.";
+      try {
+        okuyucu = new Html5Qrcode("reader");
 
+        await okuyucu.start(
+          { facingMode: "environment" },
+          {
+            fps: 10,
+            qrbox: { width: 280, height: 170 }
+          },
+          async (barkod) => {
+            if (barkod === sonOkunanBarkod) return;
+
+            sonOkunanBarkod = barkod;
+            await kamerayiKapat();
+            barkodSonucunuGoster(barkod);
+            durum.textContent = "Barkod okundu.";
+          },
+          () => {}
+        );
+
+        durum.textContent = "Barkodu kameraya göster.";
+
+      } catch (hata) {
+        console.error("Kamera hatası:", hata);
+        durum.textContent =
+          "Kamera açılamadı. Tarayıcıdan kamera izni verdiğinden emin ol.";
         okuyucu = null;
-      });
+      }
+    }
+
+    async function kamerayiKapat() {
+      if (!okuyucu) return;
+
+      const aktifOkuyucu = okuyucu;
+      okuyucu = null;
+      flashAcik = false;
+      flasButonunuGuncelle();
+
+      try {
+        await aktifOkuyucu.stop();
+        await aktifOkuyucu.clear();
+      } catch (hata) {
+        console.warn("Kamera kapatılırken sorun oluştu:", hata);
+      }
+    }
+
+    window.kamerayiYenidenBaslat = async function () {
+      await kamerayiKapat();
+      sonOkunanBarkod = "";
+      document.getElementById("taramaSonuc").innerHTML = "";
+      document.getElementById("eklemeKarti").classList.remove("gorunur");
+      await kamerayiAc();
     };
 
+    function flasButonunuGuncelle() {
+      const buton = document.getElementById("flaşButon");
+
+      buton.classList.toggle("acik", flashAcik);
+      buton.innerHTML = flashAcik
+        ? '<span class="material-symbols-outlined">flash_off</span> Flaş Kapat'
+        : '<span class="material-symbols-outlined">flash_on</span> Flaş Aç';
+    }
+
+    window.flasiDegistir = async function () {
+      const durum = document.getElementById("kameraDurum");
+      const video = document.querySelector("#reader video");
+      const track = video?.srcObject?.getVideoTracks?.()[0];
+
+      if (!track) {
+        durum.textContent = "Önce kameranın açılmasını bekle.";
+        return;
+      }
+
+      const ozellikler = track.getCapabilities?.();
+
+      if (!ozellikler?.torch) {
+        durum.textContent = "Bu cihaz veya tarayıcı flaş kontrolünü desteklemiyor.";
+        return;
+      }
+
+      try {
+        flashAcik = !flashAcik;
+
+        await track.applyConstraints({
+          advanced: [{ torch: flashAcik }]
+        });
+
+        flasButonunuGuncelle();
+        durum.textContent = flashAcik ? "Flaş açık." : "Flaş kapalı.";
+
+      } catch (hata) {
+        console.error("Flaş hatası:", hata);
+        flashAcik = false;
+        flasButonunuGuncelle();
+        durum.textContent = "Flaş açılamadı.";
+      }
+    };
+
+    flasButonunuGuncelle();
     urunleriGoster();
     firestoredenYukle();
   </script>
