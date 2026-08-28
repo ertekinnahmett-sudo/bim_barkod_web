@@ -3,16 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>BİM Barkod</title>
 
   <script src="https://unpkg.com/html5-qrcode"></script>
 
   <style>
-
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -44,9 +40,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
-    h2 {
-      margin-top: 0;
-    }
+    h2 { margin-top: 0; }
 
     input {
       width: 100%;
@@ -70,9 +64,7 @@
       cursor: pointer;
     }
 
-    .yesil {
-      background: #198754;
-    }
+    .yesil { background: #198754; }
 
     .urun {
       border: 1px solid #ddd;
@@ -109,98 +101,66 @@
       width: 100%;
       margin-top: 10px;
     }
-
   </style>
 </head>
 
 <body>
-
-  <div class="header">
-    🛒 BİM Barkod
-  </div>
+  <div class="header">🛒 BİM Barkod</div>
 
   <div class="container">
-
-    <!-- KAMERA -->
-
     <div class="card">
-
       <h2>📷 Barkod Okut</h2>
-
-      <button onclick="kamerayiAc()">
-        Kamerayı Aç
-      </button>
-
+      <button onclick="kamerayiAc()">Kamerayı Aç</button>
       <div id="reader"></div>
-
-      <div id="sonuc" class="sonuc">
-        Kamera kapalı
-      </div>
-
+      <div id="sonuc" class="sonuc">Ürünler yükleniyor...</div>
     </div>
 
-
-    <!-- ARAMA -->
-
     <div class="card">
-
       <h2>🔎 Ürün Ara</h2>
-
       <input
         type="text"
         id="arama"
         placeholder="Ürün adı veya barkod..."
         oninput="urunleriGoster()"
       >
-
     </div>
 
-
-    <!-- ÜRÜN EKLE -->
-
     <div class="card">
-
       <h2>➕ Ürün Ekle</h2>
-
-      <input
-        type="text"
-        id="urunAdi"
-        placeholder="Ürün adı"
-      >
-
-      <input
-        type="text"
-        id="barkod"
-        placeholder="Uzun barkod"
-      >
-
-      <input
-        type="text"
-        id="kisaKod"
-        placeholder="Kısa kasa kodu"
-      >
-
-      <button onclick="urunEkle()">
-        Ürün Ekle
-      </button>
-
+      <input type="text" id="urunAdi" placeholder="Ürün adı">
+      <input type="text" id="barkod" placeholder="Uzun barkod">
+      <input type="text" id="kisaKod" placeholder="Kısa kasa kodu">
+      <button onclick="urunEkle()">Ürün Ekle</button>
     </div>
-
-
-    <!-- ÜRÜNLER -->
 
     <div class="card">
-
       <h2>📦 Ürünler</h2>
-
       <div id="urunListesi"></div>
-
     </div>
-
   </div>
 
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+      doc,
+      setDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBIrLxs1fmO9kLDTU0ot6loZzUeBRGY9Zk",
+      authDomain: "bim-kod.firebaseapp.com",
+      projectId: "bim-kod",
+      storageBucket: "bim-kod.firebasestorage.app",
+      messagingSenderId: "212381326013",
+      appId: "1:212381326013:web:232e46710316de346ab5d4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
     let urunler = JSON.parse(
       localStorage.getItem("bimBarkodUrunler")
@@ -208,281 +168,208 @@
 
     let okuyucu = null;
 
+    function kaydetYerel() {
+      localStorage.setItem(
+        "bimBarkodUrunler",
+        JSON.stringify(urunler)
+      );
+    }
 
-    // ÜRÜN EKLE
+    function guvenliMetin(metin) {
+      return String(metin || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
 
-    function urunEkle() {
+    async function firestoredenYukle() {
+      try {
+        const sonuc = await getDocs(collection(db, "barkodlar"));
 
-      const ad =
-        document.getElementById("urunAdi")
-          .value.trim();
+        const firebaseUrunler = sonuc.docs.map((belge) => {
+          const veri = belge.data();
 
-      const barkod =
-        document.getElementById("barkod")
-          .value.trim();
+          return {
+            ad: veri.ad || veri.urunAdi || "Ürün adı girilmemiş",
+            barkod: veri.barkod || belge.id,
+            kod: veri.kisakod || veri.kisaKod || veri.kod || ""
+          };
+        });
 
-      const kod =
-        document.getElementById("kisaKod")
-          .value.trim();
+        const birlesikUrunler = new Map();
 
+        urunler.forEach((urun) => {
+          birlesikUrunler.set(urun.barkod, urun);
+        });
+
+        firebaseUrunler.forEach((urun) => {
+          birlesikUrunler.set(urun.barkod, urun);
+        });
+
+        urunler = [...birlesikUrunler.values()];
+        kaydetYerel();
+        urunleriGoster();
+
+        document.getElementById("sonuc").textContent =
+          `${firebaseUrunler.length} ürün Firebase'den yüklendi.`;
+
+      } catch (hata) {
+        console.error(hata);
+
+        document.getElementById("sonuc").textContent =
+          "Firebase ürünleri yüklenemedi. İnternet bağlantını kontrol et.";
+      }
+    }
+
+    window.urunEkle = async function () {
+      const ad = document.getElementById("urunAdi").value.trim();
+      const barkod = document.getElementById("barkod").value.trim();
+      const kod = document.getElementById("kisaKod").value.trim();
 
       if (!ad || !barkod || !kod) {
-
         alert("Lütfen bütün alanları doldur.");
-
         return;
       }
 
+      const yeniUrun = { ad, barkod, kod };
 
-      urunler.push({
+      try {
+        await setDoc(
+          doc(db, "barkodlar", barkod),
+          {
+            ad: ad,
+            barkod: barkod,
+            kisakod: kod,
+            tarih: serverTimestamp()
+          },
+          { merge: true }
+        );
 
-        ad: ad,
+        const eskiUrununSiraNo = urunler.findIndex(
+          (urun) => urun.barkod === barkod
+        );
 
-        barkod: barkod,
+        if (eskiUrununSiraNo >= 0) {
+          urunler[eskiUrununSiraNo] = yeniUrun;
+        } else {
+          urunler.push(yeniUrun);
+        }
 
-        kod: kod
+        kaydetYerel();
 
-      });
+        document.getElementById("urunAdi").value = "";
+        document.getElementById("barkod").value = "";
+        document.getElementById("kisaKod").value = "";
 
+        urunleriGoster();
 
-      localStorage.setItem(
+        document.getElementById("sonuc").textContent =
+          "Ürün Firebase'e kaydedildi.";
 
-        "bimBarkodUrunler",
+      } catch (hata) {
+        console.error(hata);
+        alert("Ürün Firebase'e kaydedilemedi.");
+      }
+    };
 
-        JSON.stringify(urunler)
-
-      );
-
-
-      document.getElementById("urunAdi").value = "";
-
-      document.getElementById("barkod").value = "";
-
-      document.getElementById("kisaKod").value = "";
-
-
-      urunleriGoster();
-
-    }
-
-
-    // ÜRÜNLERİ GÖSTER
-
-    function urunleriGoster() {
-
-      const liste =
-        document.getElementById("urunListesi");
-
-      const arama =
-        document.getElementById("arama")
-          .value.toLowerCase();
-
+    window.urunleriGoster = function () {
+      const liste = document.getElementById("urunListesi");
+      const arama = document.getElementById("arama").value.toLowerCase();
 
       liste.innerHTML = "";
 
-
-      const bulunanlar =
-        urunler.filter(urun =>
-
-          urun.ad.toLowerCase().includes(arama) ||
-
-          urun.barkod.includes(arama) ||
-
-          urun.kod.includes(arama)
-
-        );
-
+      const bulunanlar = urunler.filter((urun) =>
+        String(urun.ad || "").toLowerCase().includes(arama) ||
+        String(urun.barkod || "").includes(arama) ||
+        String(urun.kod || "").includes(arama)
+      );
 
       if (bulunanlar.length === 0) {
-
         liste.innerHTML =
           '<div class="bulunamadi">Ürün bulunamadı.</div>';
-
         return;
-
       }
 
-
-      bulunanlar.forEach(urun => {
-
+      bulunanlar.forEach((urun) => {
         liste.innerHTML += `
-
           <div class="urun">
-
-            <strong>${urun.ad}</strong>
-
-            Barkod: ${urun.barkod}<br>
-
+            <strong>${guvenliMetin(urun.ad)}</strong>
+            Barkod: ${guvenliMetin(urun.barkod)}<br>
             Kısa Kod:
-
-            <span class="kod">
-              ${urun.kod}
-            </span>
-
+            <span class="kod">${guvenliMetin(urun.kod)}</span>
           </div>
-
         `;
-
       });
-
-    }
-
-
-    // BARKOD OKUMA
+    };
 
     function barkodBulundu(barkod) {
-
-      const urun =
-        urunler.find(
-          u => u.barkod === barkod
-        );
-
-
-      // ÜRÜN VARSA
+      const urun = urunler.find((urun) => urun.barkod === barkod);
 
       if (urun) {
-
         document.getElementById("sonuc").innerHTML = `
-
           <div class="urun">
-
-            <strong>✅ ${urun.ad}</strong>
-
-            Barkod: ${urun.barkod}<br>
-
+            <strong>✅ ${guvenliMetin(urun.ad)}</strong>
+            Barkod: ${guvenliMetin(urun.barkod)}<br>
             Kısa Kasa Kodu:
-
-            <div class="kod">
-              ${urun.kod}
-            </div>
-
+            <div class="kod">${guvenliMetin(urun.kod)}</div>
           </div>
-
         `;
-
         return;
-
       }
 
-
-      // ÜRÜN YOKSA
-
       document.getElementById("sonuc").innerHTML = `
-
         <div class="urun">
-
           <strong>❌ Barkod bulunamadı</strong>
-
-          <div style="margin-top:10px;">
-            ${barkod}
-          </div>
-
+          <div style="margin-top:10px;">${guvenliMetin(barkod)}</div>
           <button
             class="yesil"
             onclick="bulunamayanUrunuEkle('${barkod}')"
           >
             ➕ Bu Ürünü Ekle
           </button>
-
         </div>
-
       `;
-
     }
 
-
-    // BULUNAMAYAN ÜRÜNÜ EKLEME FORMUNA GÖNDER
-
-    function bulunamayanUrunuEkle(barkod) {
-
-      document.getElementById("barkod").value =
-        barkod;
-
-
-      document.getElementById("urunAdi")
-        .focus();
-
+    window.bulunamayanUrunuEkle = function (barkod) {
+      document.getElementById("barkod").value = barkod;
+      document.getElementById("urunAdi").focus();
 
       window.scrollTo({
-
-        top:
-          document.getElementById("urunAdi")
-            .offsetTop - 100,
-
+        top: document.getElementById("urunAdi").offsetTop - 100,
         behavior: "smooth"
-
       });
+    };
 
-    }
+    window.kamerayiAc = function () {
+      if (okuyucu) return;
 
-
-    // KAMERA
-
-    function kamerayiAc() {
-
-      if (okuyucu) {
-
-        return;
-
-      }
-
-
-      okuyucu =
-        new Html5Qrcode("reader");
-
+      okuyucu = new Html5Qrcode("reader");
 
       okuyucu.start(
-
-        {
-          facingMode: "environment"
-        },
-
+        { facingMode: "environment" },
         {
           fps: 10,
-
-          qrbox: {
-
-            width: 280,
-
-            height: 160
-
-          }
-
+          qrbox: { width: 280, height: 160 }
         },
-
         (barkod) => {
-
-          document.getElementById("arama")
-            .value = barkod;
-
-
+          document.getElementById("arama").value = barkod;
           barkodBulundu(barkod);
-
-
           urunleriGoster();
-
         },
-
         () => {}
-
-      )
-
-      .catch(() => {
-
-        document.getElementById("sonuc")
-          .textContent =
+      ).catch(() => {
+        document.getElementById("sonuc").textContent =
           "Kamera açılamadı.";
 
         okuyucu = null;
-
       });
-
-    }
-
+    };
 
     urunleriGoster();
-
+    firestoredenYukle();
   </script>
-
 </body>
 </html>
