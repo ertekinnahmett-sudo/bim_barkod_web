@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>BİM Barkod</title>
 
   <script src="https://unpkg.com/html5-qrcode"></script>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -68,28 +70,39 @@
       cursor: pointer;
     }
 
+    .yesil {
+      background: #198754;
+    }
+
     .urun {
       border: 1px solid #ddd;
       border-radius: 8px;
-      padding: 12px;
+      padding: 15px;
       margin-top: 10px;
     }
 
     .urun strong {
       display: block;
-      font-size: 18px;
-      margin-bottom: 5px;
+      font-size: 19px;
+      margin-bottom: 7px;
     }
 
     .kod {
       color: #e30613;
+      font-size: 20px;
       font-weight: bold;
     }
 
-    .bos {
+    .sonuc {
       text-align: center;
-      color: #777;
-      padding: 15px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .bulunamadi {
+      color: #e30613;
+      text-align: center;
+      padding: 10px;
     }
 
     #reader {
@@ -97,11 +110,6 @@
       margin-top: 10px;
     }
 
-    #sonuc {
-      text-align: center;
-      font-weight: bold;
-      margin-top: 10px;
-    }
   </style>
 </head>
 
@@ -113,25 +121,30 @@
 
   <div class="container">
 
+    <!-- KAMERA -->
+
     <div class="card">
 
       <h2>📷 Barkod Okut</h2>
 
-      <button onclick="barkodOkuyucuyuAc()">
+      <button onclick="kamerayiAc()">
         Kamerayı Aç
       </button>
 
       <div id="reader"></div>
 
-      <div id="sonuc">
+      <div id="sonuc" class="sonuc">
         Kamera kapalı
       </div>
 
     </div>
 
+
+    <!-- ARAMA -->
+
     <div class="card">
 
-      <h2>Ürün Ara</h2>
+      <h2>🔎 Ürün Ara</h2>
 
       <input
         type="text"
@@ -142,9 +155,12 @@
 
     </div>
 
+
+    <!-- ÜRÜN EKLE -->
+
     <div class="card">
 
-      <h2>Ürün Ekle</h2>
+      <h2>➕ Ürün Ekle</h2>
 
       <input
         type="text"
@@ -170,15 +186,19 @@
 
     </div>
 
+
+    <!-- ÜRÜNLER -->
+
     <div class="card">
 
-      <h2>Ürünler</h2>
+      <h2>📦 Ürünler</h2>
 
       <div id="urunListesi"></div>
 
     </div>
 
   </div>
+
 
   <script>
 
@@ -188,39 +208,65 @@
 
     let okuyucu = null;
 
+
+    // ÜRÜN EKLE
+
     function urunEkle() {
 
       const ad =
-        document.getElementById("urunAdi").value.trim();
+        document.getElementById("urunAdi")
+          .value.trim();
 
       const barkod =
-        document.getElementById("barkod").value.trim();
+        document.getElementById("barkod")
+          .value.trim();
 
       const kod =
-        document.getElementById("kisaKod").value.trim();
+        document.getElementById("kisaKod")
+          .value.trim();
+
 
       if (!ad || !barkod || !kod) {
+
         alert("Lütfen bütün alanları doldur.");
+
         return;
       }
 
+
       urunler.push({
+
         ad: ad,
+
         barkod: barkod,
+
         kod: kod
+
       });
 
+
       localStorage.setItem(
+
         "bimBarkodUrunler",
+
         JSON.stringify(urunler)
+
       );
 
+
       document.getElementById("urunAdi").value = "";
+
       document.getElementById("barkod").value = "";
+
       document.getElementById("kisaKod").value = "";
 
+
       urunleriGoster();
+
     }
+
+
+    // ÜRÜNLERİ GÖSTER
 
     function urunleriGoster() {
 
@@ -228,81 +274,211 @@
         document.getElementById("urunListesi");
 
       const arama =
-        document
-          .getElementById("arama")
-          .value
-          .toLowerCase();
+        document.getElementById("arama")
+          .value.toLowerCase();
+
 
       liste.innerHTML = "";
 
-      const bulunanlar = urunler.filter(urun =>
-        urun.ad.toLowerCase().includes(arama) ||
-        urun.barkod.includes(arama) ||
-        urun.kod.includes(arama)
-      );
+
+      const bulunanlar =
+        urunler.filter(urun =>
+
+          urun.ad.toLowerCase().includes(arama) ||
+
+          urun.barkod.includes(arama) ||
+
+          urun.kod.includes(arama)
+
+        );
+
 
       if (bulunanlar.length === 0) {
+
         liste.innerHTML =
-          '<div class="bos">Ürün bulunamadı.</div>';
+          '<div class="bulunamadi">Ürün bulunamadı.</div>';
+
         return;
+
       }
+
 
       bulunanlar.forEach(urun => {
 
         liste.innerHTML += `
+
           <div class="urun">
+
             <strong>${urun.ad}</strong>
+
             Barkod: ${urun.barkod}<br>
+
             Kısa Kod:
-            <span class="kod">${urun.kod}</span>
+
+            <span class="kod">
+              ${urun.kod}
+            </span>
+
           </div>
+
         `;
 
       });
+
     }
 
-    function barkodOkuyucuyuAc() {
 
-      if (okuyucu) {
+    // BARKOD OKUMA
+
+    function barkodBulundu(barkod) {
+
+      const urun =
+        urunler.find(
+          u => u.barkod === barkod
+        );
+
+
+      // ÜRÜN VARSA
+
+      if (urun) {
+
+        document.getElementById("sonuc").innerHTML = `
+
+          <div class="urun">
+
+            <strong>✅ ${urun.ad}</strong>
+
+            Barkod: ${urun.barkod}<br>
+
+            Kısa Kasa Kodu:
+
+            <div class="kod">
+              ${urun.kod}
+            </div>
+
+          </div>
+
+        `;
+
         return;
+
       }
 
-      okuyucu = new Html5Qrcode("reader");
+
+      // ÜRÜN YOKSA
+
+      document.getElementById("sonuc").innerHTML = `
+
+        <div class="urun">
+
+          <strong>❌ Barkod bulunamadı</strong>
+
+          <div style="margin-top:10px;">
+            ${barkod}
+          </div>
+
+          <button
+            class="yesil"
+            onclick="bulunamayanUrunuEkle('${barkod}')"
+          >
+            ➕ Bu Ürünü Ekle
+          </button>
+
+        </div>
+
+      `;
+
+    }
+
+
+    // BULUNAMAYAN ÜRÜNÜ EKLEME FORMUNA GÖNDER
+
+    function bulunamayanUrunuEkle(barkod) {
+
+      document.getElementById("barkod").value =
+        barkod;
+
+
+      document.getElementById("urunAdi")
+        .focus();
+
+
+      window.scrollTo({
+
+        top:
+          document.getElementById("urunAdi")
+            .offsetTop - 100,
+
+        behavior: "smooth"
+
+      });
+
+    }
+
+
+    // KAMERA
+
+    function kamerayiAc() {
+
+      if (okuyucu) {
+
+        return;
+
+      }
+
+
+      okuyucu =
+        new Html5Qrcode("reader");
+
 
       okuyucu.start(
-        { facingMode: "environment" },
+
+        {
+          facingMode: "environment"
+        },
+
         {
           fps: 10,
+
           qrbox: {
-            width: 250,
-            height: 150
+
+            width: 280,
+
+            height: 160
+
           }
+
         },
 
         (barkod) => {
 
-          document.getElementById("arama").value = barkod;
+          document.getElementById("arama")
+            .value = barkod;
 
-          document.getElementById("sonuc").textContent =
-            "Barkod okundu: " + barkod;
+
+          barkodBulundu(barkod);
+
 
           urunleriGoster();
 
         },
 
-        () => {
-          // Barkod bulunamadığında burada hiçbir şey yapmıyoruz.
-        }
+        () => {}
 
-      ).catch((hata) => {
+      )
 
-        document.getElementById("sonuc").textContent =
+      .catch(() => {
+
+        document.getElementById("sonuc")
+          .textContent =
           "Kamera açılamadı.";
 
         okuyucu = null;
 
       });
+
     }
+
 
     urunleriGoster();
 
