@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="tr">
 <head>
@@ -14,22 +15,92 @@
 
 <style>
 :root{--bg:#fff9f7;--text:#24201f;--red:#a75a50;--soft:#5e4d49;--pale:#fff0ed}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-button,input{font:inherit}button{cursor:pointer}.app{width:min(100%,520px);min-height:100vh;margin:auto;padding:28px 28px 38px}
-.screen{display:none}.screen.active{display:block}.mi{font-family:"Material Symbols Outlined";font-weight:normal;font-style:normal;vertical-align:middle}
-.home-title{text-align:center;font-size:30px;font-weight:400;margin:45px 0 0}.hero{min-height:500px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:34px;text-align:center}
-.scan-icon{font-size:130px;line-height:1;margin-bottom:34px}.brand{font-size:43px;margin:0;font-weight:700}.desc{font-size:23px;margin:24px 0 0}
-.home-buttons{display:grid;gap:20px}.home-btn{min-height:64px;border-radius:34px;font-size:20px;display:flex;align-items:center;justify-content:center;gap:12px}
-.scan-btn{border:1px solid #f0ded9;background:var(--pale);color:var(--red);box-shadow:0 3px 4px #41272228}.gallery-btn{border:1px solid #ecd5d0;background:#fff;color:var(--red)}.saved-btn{border:1.5px solid #766866;background:transparent;color:var(--red)}
-.top{min-height:54px;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;margin-bottom:24px}.top h1{text-align:center;font-size:23px;margin:0}.back{width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--text)}
-.card{padding:18px;border:1px solid #eee3e0;border-radius:22px;background:#fff;box-shadow:0 5px 18px #36262312}#reader{min-height:160px;overflow:hidden;border-radius:14px}#reader video{border-radius:12px}#reader{position:relative}#focusMessage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:8px 12px;border-radius:12px;background:#0008;color:#fff;font-size:14px;pointer-events:none;opacity:0;transition:opacity .2s}
-.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}.cam-btn{min-height:50px;border:1px solid #e3d4d0;border-radius:14px;background:#fff7f5;color:var(--red);font-weight:700}.cam-btn.on{background:var(--red);border-color:var(--red);color:#fff}
-.status,.result{min-height:30px;margin-top:15px;color:var(--soft);text-align:center;line-height:1.45}.result-box{margin-top:16px;padding:18px;border-radius:16px;background:#fff4f1;text-align:left}.result-box strong{display:block;margin-bottom:9px;font-size:21px}.code{display:inline-block;margin-top:8px;color:var(--red);font-size:27px;font-weight:700}
-.manual-card,.add-card{display:none;margin-top:18px}.manual-card.show,.add-card.show{display:block}.manual-card h2,.add-card h2{margin:0 0 10px;font-size:20px}
-input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid #d8cbc7;border-radius:13px;outline-color:var(--red)}input[readonly]{background:#f7f0ee}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{width:min(100%,520px);min-height:100vh;margin:auto;padding:28px 28px 38px}
+.screen{display:none}
+.screen.active{display:block}
+.mi{font-family:"Material Symbols Outlined";font-weight:normal;font-style:normal;vertical-align:middle}
+
+.home-title{text-align:center;font-size:30px;font-weight:400;margin:45px 0 0}
+.hero{min-height:500px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:34px;text-align:center}
+.scan-icon{font-size:130px;line-height:1;margin-bottom:34px}
+.brand{font-size:43px;margin:0;font-weight:700}
+.desc{font-size:23px;margin:24px 0 0}
+.home-buttons{display:grid;gap:20px}
+.home-btn{min-height:64px;border-radius:34px;font-size:20px;display:flex;align-items:center;justify-content:center;gap:12px}
+.scan-btn{border:1px solid #f0ded9;background:var(--pale);color:var(--red);box-shadow:0 3px 4px #41272228}
+.gallery-btn{border:1px solid #ecd5d0;background:#fff;color:var(--red)}
+.saved-btn{border:1.5px solid #766866;background:transparent;color:var(--red)}
+
+.top{min-height:54px;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;margin-bottom:24px}
+.top h1{text-align:center;font-size:23px;margin:0}
+.back{width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--text)}
+
+.card{padding:18px;border:1px solid #eee3e0;border-radius:22px;background:#fff;box-shadow:0 5px 18px #36262312}
+#reader{min-height:160px;overflow:hidden;border-radius:14px}
+#reader video{border-radius:12px}
+#reader{position:relative}
+#focusMessage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:8px 12px;border-radius:12px;background:#0008;color:#fff;font-size:14px;pointer-events:none;opacity:0;transition:opacity .2s}
+
+.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+.cam-btn{min-height:50px;border:1px solid #e3d4d0;border-radius:14px;background:#fff7f5;color:var(--red);font-weight:700}
+.cam-btn.on{background:var(--red);border-color:var(--red);color:#fff}
+
+.status,.result{min-height:30px;margin-top:15px;color:var(--soft);text-align:center;line-height:1.45}
+.result-box{margin-top:16px;padding:18px;border-radius:16px;background:#fff4f1;text-align:left}
+.result-box strong{display:block;margin-bottom:9px;font-size:21px}
+.code{display:inline-block;margin-top:8px;color:var(--red);font-size:27px;font-weight:700}
+
+.manual-card,.add-card,.edit-card{display:none;margin-top:18px}
+.manual-card.show,.add-card.show,.edit-card.show{display:block}
+.manual-card h2,.add-card h2,.edit-card h2{margin:0 0 10px;font-size:20px}
+
+input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid #d8cbc7;border-radius:13px;outline-color:var(--red)}
+input[readonly]{background:#f7f0ee}
+
 .save{width:100%;min-height:52px;margin-top:10px;border:0;border-radius:14px;background:var(--red);color:#fff;font-weight:700}
-.list{display:grid;gap:11px}.product{padding:15px;border:1px solid #eadeda;border-radius:15px;background:#fffdfc}.product strong{display:block;margin-bottom:8px;font-size:18px}.info{color:var(--soft);line-height:1.5}.empty{padding:32px 12px;text-align:center;color:var(--soft)}
-@media(max-width:390px){.app{padding:20px}.hero{min-height:445px}.brand{font-size:37px}.desc{font-size:20px}}
+
+.list{display:grid;gap:11px}
+.product{padding:15px;border:1px solid #eadeda;border-radius:15px;background:#fffdfc}
+.product strong{display:block;margin-bottom:8px;font-size:18px}
+.info{color:var(--soft);line-height:1.5}
+
+.product-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:13px;
+}
+
+.edit-btn,.delete-btn{
+  min-height:44px;
+  border-radius:12px;
+  font-weight:700;
+}
+
+.edit-btn{
+  border:1px solid #d8cbc7;
+  background:#fff7f5;
+  color:var(--red);
+}
+
+.delete-btn{
+  border:1px solid #e4c8c2;
+  background:#fff;
+  color:#a33f35;
+}
+
+.empty{padding:32px 12px;text-align:center;color:var(--soft)}
+
+@media(max-width:390px){
+  .app{padding:20px}
+  .hero{min-height:445px}
+  .brand{font-size:37px}
+  .desc{font-size:20px}
+}
 </style>
 </head>
 
@@ -46,29 +117,54 @@ input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid
   </div>
 
   <div class="home-buttons">
-    <button class="home-btn scan-btn" onclick="openScan()"><span class="mi">photo_camera</span>Barkod Tara</button>
-    <button class="home-btn gallery-btn" onclick="document.getElementById('galleryInput').click()"><span class="mi">photo_library</span>Galeriden Tara</button>
-    <button class="home-btn saved-btn" onclick="openSaved()"><span class="mi">format_list_bulleted</span>Kayıtlı Barkodlar</button>
+    <button class="home-btn scan-btn" onclick="openScan()">
+      <span class="mi">photo_camera</span>Barkod Tara
+    </button>
+
+    <button class="home-btn gallery-btn" onclick="document.getElementById('galleryInput').click()">
+      <span class="mi">photo_library</span>Galeriden Tara
+    </button>
+
+    <button class="home-btn saved-btn" onclick="openSaved()">
+      <span class="mi">format_list_bulleted</span>Kayıtlı Barkodlar
+    </button>
   </div>
 
   <input id="galleryInput" type="file" accept="image/*" hidden onchange="scanGallery(event)">
 </section>
 
+
 <section id="scan" class="screen">
   <div class="top">
-    <button class="back" onclick="goHome()"><span class="mi">arrow_back</span></button>
+    <button class="back" onclick="goHome()">
+      <span class="mi">arrow_back</span>
+    </button>
+
     <h1>Barkod Tara</h1>
     <span></span>
   </div>
 
   <div class="card">
-    <div id="reader"><div id="focusMessage">Odaklanıyor...</div></div>
+    <div id="reader">
+      <div id="focusMessage">Odaklanıyor...</div>
+    </div>
 
     <div class="controls">
-      <button id="flashBtn" class="cam-btn" onclick="toggleFlash()"><span class="mi">flash_on</span>Flaş Aç</button>
-      <button class="cam-btn" onclick="switchCamera()"><span class="mi">flip_camera_android</span>Kamera Değiştir</button>
-      <button id="focusBtn" class="cam-btn"><span class="mi">center_focus_strong</span>Odakla</button>
-      <button class="cam-btn" onclick="restartCamera()"><span class="mi">refresh</span>Yeniden Tara</button>
+      <button id="flashBtn" class="cam-btn" onclick="toggleFlash()">
+        <span class="mi">flash_on</span>Flaş Aç
+      </button>
+
+      <button class="cam-btn" onclick="switchCamera()">
+        <span class="mi">flip_camera_android</span>Kamera Değiştir
+      </button>
+
+      <button id="focusBtn" class="cam-btn">
+        <span class="mi">center_focus_strong</span>Odakla
+      </button>
+
+      <button class="cam-btn" onclick="restartCamera()">
+        <span class="mi">refresh</span>Yeniden Tara
+      </button>
     </div>
 
     <div id="cameraStatus" class="status"></div>
@@ -77,36 +173,95 @@ input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid
 
   <div id="manualCard" class="card manual-card">
     <h2>Barkodu Elle Gir</h2>
+
     <input id="manualBarcode" inputmode="numeric" placeholder="Barkod numarasını yaz">
-    <button class="save" onclick="searchManualBarcode()">Barkodu Ara</button>
+
+    <button class="save" onclick="searchManualBarcode()">
+      Barkodu Ara
+    </button>
   </div>
 
   <div id="addCard" class="card add-card">
     <h2>Yeni barkodu kaydet</h2>
+
     <input id="newBarcode" readonly>
+
     <input id="shortCode" placeholder="Kısa kasa kodu">
-    <button class="save" onclick="saveProduct()">Kaydet</button>
+
+    <button class="save" onclick="saveProduct()">
+      Kaydet
+    </button>
   </div>
 </section>
 
+
 <section id="saved" class="screen">
   <div class="top">
-    <button class="back" onclick="goHome()"><span class="mi">arrow_back</span></button>
+    <button class="back" onclick="goHome()">
+      <span class="mi">arrow_back</span>
+    </button>
+
     <h1>Kayıtlı Barkodlar</h1>
     <span></span>
   </div>
 
   <div class="card">
     <input id="search" placeholder="Barkod veya ürün ara" oninput="renderProducts()">
+
     <div id="productList" class="list"></div>
   </div>
 </section>
 
+
+<!-- DÜZENLEME EKRANI -->
+<section id="edit" class="screen">
+
+  <div class="top">
+    <button class="back" onclick="closeEdit()">
+      <span class="mi">arrow_back</span>
+    </button>
+
+    <h1>Barkodu Düzenle</h1>
+    <span></span>
+  </div>
+
+  <div class="card edit-card show">
+
+    <h2>Ürün bilgilerini düzenle</h2>
+
+    <input id="editBarcode" readonly>
+
+    <input id="editName" placeholder="Ürün adı">
+
+    <input id="editShortCode" placeholder="Kısa kasa kodu">
+
+    <button class="save" onclick="updateProduct()">
+      Kaydet
+    </button>
+
+  </div>
+
+</section>
+
 </main>
 
+
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getFirestore,collection,getDocs,doc,setDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  setDoc,
+  deleteDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 
 const app=initializeApp({
   apiKey:"AIzaSyBIrLxs1fmO9kLDTU0ot6loZzUeBRGY9Zk",
@@ -117,485 +272,1565 @@ const app=initializeApp({
   appId:"1:212381326013:web:232e46710316de346ab5d4"
 });
 
-const db=getFirestore(app);
-let products=JSON.parse(localStorage.getItem("bimBarkodUrunler"))||[];
-let scanner=null,flash=false,lastBarcode="",manualTimer=null,cameras=[],cameraIndex=0,currentCameraId=null;
 
-const safe=value=>String(value||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-const localSave=()=>localStorage.setItem("bimBarkodUrunler",JSON.stringify(products));
+const db=getFirestore(app);
+
+let products=JSON.parse(localStorage.getItem("bimBarkodUrunler"))||[];
+
+let scanner=null;
+let flash=false;
+let lastBarcode="";
+let manualTimer=null;
+let cameras=[];
+let cameraIndex=0;
+let currentCameraId=null;
+
+let editingBarcode="";
+
+
+const safe=value=>String(value||"")
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+
+
+const localSave=()=>{
+  localStorage.setItem(
+    "bimBarkodUrunler",
+    JSON.stringify(products)
+  );
+};
+
 
 function show(id){
-  document.querySelectorAll(".screen").forEach(screen=>screen.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen=>screen.classList.remove("active"));
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
   window.scrollTo(0,0);
 }
 
+
 async function loadFirebase(){
+
   try{
-    const snapshot=await getDocs(collection(db,"barkodlar"));
-    const merged=new Map(products.map(product=>[product.barkod,product]));
+
+    const snapshot=await getDocs(
+      collection(db,"barkodlar")
+    );
+
+    const merged=new Map(
+      products.map(product=>[
+        product.barkod,
+        product
+      ])
+    );
+
 
     snapshot.docs.forEach(item=>{
+
       const data=item.data();
-      merged.set(data.barkod||item.id,{
-        ad:data.ad||data.urunAdi||"Ürün adı girilmemiş",
-        barkod:data.barkod||item.id,
-        kod:data.kisakod||data.kisaKod||data.kod||""
-      });
+
+      merged.set(
+        data.barkod||item.id,
+        {
+          ad:data.ad||data.urunAdi||"Ürün adı girilmemiş",
+          barkod:data.barkod||item.id,
+          kod:data.kisakod||data.kisaKod||data.kod||""
+        }
+      );
+
     });
 
+
     products=[...merged.values()];
+
     localSave();
+
     renderProducts();
-  }catch(error){console.error(error)}
+
+  }catch(error){
+
+    console.error(error);
+
+  }
 }
 
+
 window.goHome=async()=>{
+
   await stopCamera();
+
   clearTimeout(manualTimer);
-  document.getElementById("manualCard").classList.remove("show");
-  document.getElementById("addCard").classList.remove("show");
-  document.getElementById("scanResult").innerHTML="";
+
+  document
+    .getElementById("manualCard")
+    .classList.remove("show");
+
+  document
+    .getElementById("addCard")
+    .classList.remove("show");
+
+  document
+    .getElementById("scanResult")
+    .innerHTML="";
+
   show("home");
 };
 
+
 window.openScan=async()=>{
-  document.getElementById("manualCard").classList.remove("show");
-  document.getElementById("addCard").classList.remove("show");
-  document.getElementById("scanResult").innerHTML="";
-  document.getElementById("manualBarcode").value="";
+
+  document
+    .getElementById("manualCard")
+    .classList.remove("show");
+
+  document
+    .getElementById("addCard")
+    .classList.remove("show");
+
+  document
+    .getElementById("scanResult")
+    .innerHTML="";
+
+  document
+    .getElementById("manualBarcode")
+    .value="";
+
   show("scan");
+
   await startCamera();
 };
 
-window.openSaved=()=>{renderProducts();show("saved")};
+
+window.openSaved=()=>{
+
+  renderProducts();
+
+  show("saved");
+
+};
+
 
 window.renderProducts=()=>{
-  const q=document.getElementById("search").value.toLowerCase().trim();
+
+  const q=document
+    .getElementById("search")
+    .value
+    .toLowerCase()
+    .trim();
+
+
   const list=products.filter(product=>
-    String(product.ad).toLowerCase().includes(q)||
-    String(product.barkod).includes(q)||
-    String(product.kod).includes(q)
+
+    String(product.ad)
+      .toLowerCase()
+      .includes(q)
+
+    ||
+
+    String(product.barkod)
+      .includes(q)
+
+    ||
+
+    String(product.kod)
+      .includes(q)
+
   );
 
-  document.getElementById("productList").innerHTML=list.length
-    ?list.map(product=>`
+
+  document.getElementById("productList").innerHTML=
+
+    list.length
+
+    ?
+
+    list.map(product=>`
+
       <article class="product">
-        <strong>${safe(product.ad)}</strong>
-        <div class="info">Barkod: ${safe(product.barkod)}<br>Kısa kod: <b>${safe(product.kod)}</b></div>
+
+        <strong>
+          ${safe(product.ad)}
+        </strong>
+
+        <div class="info">
+          Barkod: ${safe(product.barkod)}
+          <br>
+          Kısa kod:
+          <b>${safe(product.kod)}</b>
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            class="edit-btn"
+            onclick="editProduct('${safe(product.barkod)}')"
+          >
+            <span class="mi">edit</span>
+            Düzenle
+          </button>
+
+          <button
+            class="delete-btn"
+            onclick="deleteProduct('${safe(product.barkod)}')"
+          >
+            <span class="mi">delete</span>
+            Sil
+          </button>
+
+        </div>
+
       </article>
+
     `).join("")
-    :'<div class="empty">Henüz gösterilecek barkod yok.</div>';
+
+    :
+
+    '<div class="empty">Henüz gösterilecek barkod yok.</div>';
+
 };
+
 
 function showResult(barcode){
-  const product=products.find(item=>item.barkod===barcode);
+
+  const product=products.find(
+    item=>item.barkod===barcode
+  );
+
   const result=document.getElementById("scanResult");
+
   const addCard=document.getElementById("addCard");
 
+
   if(product){
+
     addCard.classList.remove("show");
+
     result.innerHTML=`
+
       <div class="result-box">
-        <strong>✓ ${safe(product.ad)}</strong>
-        Barkod: ${safe(product.barkod)}<br>
-        Kısa kasa kodu:<div class="code">${safe(product.kod)}</div>
-      </div>`;
+
+        <strong>
+          ✓ ${safe(product.ad)}
+        </strong>
+
+        Barkod:
+        ${safe(product.barkod)}
+
+        <br>
+
+        Kısa kasa kodu:
+
+        <div class="code">
+          ${safe(product.kod)}
+        </div>
+
+      </div>
+
+    `;
+
     return;
   }
+
 
   document.getElementById("newBarcode").value=barcode;
+
   document.getElementById("shortCode").value="";
-  result.innerHTML=`<div class="result-box"><strong>Bu barkod kayıtlı değil</strong>Barkod: ${safe(barcode)}</div>`;
+
+  result.innerHTML=`
+
+    <div class="result-box">
+
+      <strong>
+        Bu barkod kayıtlı değil
+      </strong>
+
+      Barkod:
+      ${safe(barcode)}
+
+    </div>
+
+  `;
+
   addCard.classList.add("show");
-  document.getElementById("shortCode").focus();
+
+  document
+    .getElementById("shortCode")
+    .focus();
+
 }
+
 
 window.searchManualBarcode=()=>{
-  const barcode=document.getElementById("manualBarcode").value.trim();
+
+  const barcode=document
+    .getElementById("manualBarcode")
+    .value
+    .trim();
+
 
   if(!barcode){
+
     alert("Lütfen barkod numarasını yaz.");
+
     return;
+
   }
+
 
   showResult(barcode);
+
 };
+
 
 window.saveProduct=async()=>{
-  const barkod=document.getElementById("newBarcode").value.trim();
-  const kod=document.getElementById("shortCode").value.trim();
+
+  const barkod=document
+    .getElementById("newBarcode")
+    .value
+    .trim();
+
+  const kod=document
+    .getElementById("shortCode")
+    .value
+    .trim();
+
 
   if(!kod){
+
     alert("Lütfen kısa kasa kodunu yaz.");
+
     return;
+
   }
 
+
   try{
-    await setDoc(doc(db,"barkodlar",barkod),{barkod,kisakod:kod,tarih:serverTimestamp()},{merge:true});
 
-    const product={ad:"",barkod,kod};
-    const index=products.findIndex(item=>item.barkod===barkod);
+    await setDoc(
+      doc(db,"barkodlar",barkod),
+      {
+        barkod,
+        kisakod:kod,
+        tarih:serverTimestamp()
+      },
+      {
+        merge:true
+      }
+    );
 
-    if(index<0)products.push(product);
-    else products[index]=product;
+
+    const product={
+      ad:"",
+      barkod,
+      kod
+    };
+
+
+    const index=products.findIndex(
+      item=>item.barkod===barkod
+    );
+
+
+    if(index<0)
+
+      products.push(product);
+
+    else
+
+      products[index]=product;
+
 
     localSave();
+
     renderProducts();
-    document.getElementById("addCard").classList.remove("show");
+
+    document
+      .getElementById("addCard")
+      .classList.remove("show");
+
     showResult(barkod);
 
+
   }catch(error){
+
     console.error(error);
+
     alert("Ürün Firebase'e kaydedilemedi.");
+
   }
+
 };
 
-async function getCameraList(){
-  try{
-    const list=await Html5Qrcode.getCameras();
-    cameras=Array.isArray(list)?list:[];
-    if(currentCameraId){
-      const found=cameras.findIndex(camera=>camera.id===currentCameraId);
-      if(found>=0)cameraIndex=found;
-    }
-    return cameras;
-  }catch(error){
-    console.error(error);
-    cameras=[];
-    return [];
+
+/* =========================
+   DÜZENLE
+========================= */
+
+window.editProduct=(barcode)=>{
+
+  const product=products.find(
+    item=>item.barkod===barcode
+  );
+
+
+  if(!product){
+
+    alert("Ürün bulunamadı.");
+
+    return;
+
   }
+
+
+  editingBarcode=barcode;
+
+
+  document
+    .getElementById("editBarcode")
+    .value=product.barkod;
+
+
+  document
+    .getElementById("editName")
+    .value=product.ad||"";
+
+
+  document
+    .getElementById("editShortCode")
+    .value=product.kod||"";
+
+
+  show("edit");
+
+};
+
+
+window.closeEdit=()=>{
+
+  editingBarcode="";
+
+  show("saved");
+
+};
+
+
+window.updateProduct=async()=>{
+
+  if(!editingBarcode){
+
+    alert("Düzenlenecek ürün bulunamadı.");
+
+    return;
+
+  }
+
+
+  const name=document
+    .getElementById("editName")
+    .value
+    .trim();
+
+
+  const kod=document
+    .getElementById("editShortCode")
+    .value
+    .trim();
+
+
+  if(!kod){
+
+    alert("Lütfen kısa kasa kodunu yaz.");
+
+    return;
+
+  }
+
+
+  try{
+
+    await setDoc(
+
+      doc(
+        db,
+        "barkodlar",
+        editingBarcode
+      ),
+
+      {
+        barkod:editingBarcode,
+        ad:name,
+        kisakod:kod,
+        tarih:serverTimestamp()
+      },
+
+      {
+        merge:true
+      }
+
+    );
+
+
+    const index=products.findIndex(
+      item=>item.barkod===editingBarcode
+    );
+
+
+    if(index>=0){
+
+      products[index]={
+        ...products[index],
+        ad:name,
+        kod:kod
+      };
+
+    }
+
+
+    localSave();
+
+    editingBarcode="";
+
+    alert("Ürün başarıyla güncellendi.");
+
+    renderProducts();
+
+    show("saved");
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert("Ürün güncellenemedi.");
+
+  }
+
+};
+
+
+/* =========================
+   SİL
+========================= */
+
+window.deleteProduct=async(barcode)=>{
+
+  const product=products.find(
+    item=>item.barkod===barcode
+  );
+
+
+  if(!product){
+
+    alert("Ürün bulunamadı.");
+
+    return;
+
+  }
+
+
+  const confirmed=confirm(
+
+    "Bu barkodu silmek istediğine emin misin?\n\n"
+
+    +
+
+    (product.ad||"Ürün")
+
+    +
+
+    "\nBarkod: "
+
+    +
+
+    barcode
+
+  );
+
+
+  if(!confirmed)return;
+
+
+  try{
+
+    await deleteDoc(
+      doc(db,"barkodlar",barcode)
+    );
+
+
+    products=products.filter(
+      item=>item.barkod!==barcode
+    );
+
+
+    localSave();
+
+    renderProducts();
+
+
+    alert("Barkod başarıyla silindi.");
+
+  }catch(error){
+
+    console.error(error);
+
+    alert("Barkod silinemedi.");
+
+  }
+
+};
+
+
+/* =========================
+   KAMERA
+========================= */
+
+async function getCameraList(){
+
+  try{
+
+    const list=await Html5Qrcode.getCameras();
+
+    cameras=Array.isArray(list)
+      ?list
+      :[];
+
+
+    if(currentCameraId){
+
+      const found=cameras.findIndex(
+        camera=>camera.id===currentCameraId
+      );
+
+      if(found>=0)
+        cameraIndex=found;
+
+    }
+
+
+    return cameras;
+
+  }catch(error){
+
+    console.error(error);
+
+    cameras=[];
+
+    return [];
+
+  }
+
 }
+
 
 async function focusCamera(event){
-  const video=document.querySelector("#reader video");
-  const track=video?.srcObject?.getVideoTracks?.()[0];
-  const status=document.getElementById("cameraStatus");
-  const message=document.getElementById("focusMessage");
+
+  const video=document.querySelector(
+    "#reader video"
+  );
+
+  const track=
+    video?.srcObject?.getVideoTracks?.()[0];
+
+  const status=
+    document.getElementById("cameraStatus");
+
+  const message=
+    document.getElementById("focusMessage");
+
 
   if(!track){
-    status.textContent="Kamera henüz hazır değil.";
+
+    status.textContent=
+      "Kamera henüz hazır değil.";
+
     return;
+
   }
 
-  const capabilities=track.getCapabilities?.() || {};
-  const settings=track.getSettings?.() || {};
 
-  if(!capabilities.focusMode && !capabilities.focusDistance){
-    status.textContent="Bu cihaz/tarayıcı dokunarak odaklamayı desteklemiyor.";
+  const capabilities=
+    track.getCapabilities?.()||{};
+
+
+  if(
+    !capabilities.focusMode &&
+    !capabilities.focusDistance
+  ){
+
+    status.textContent=
+      "Bu cihaz/tarayıcı dokunarak odaklamayı desteklemiyor.";
+
     return;
+
   }
 
-  const rect=video.getBoundingClientRect();
-  const x=Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width));
-  const y=Math.max(0,Math.min(1,(event.clientY-rect.top)/rect.height));
+
+  const rect=
+    video.getBoundingClientRect();
+
+
+  const x=Math.max(
+    0,
+    Math.min(
+      1,
+      (event.clientX-rect.left)/rect.width
+    )
+  );
+
+
+  const y=Math.max(
+    0,
+    Math.min(
+      1,
+      (event.clientY-rect.top)/rect.height
+    )
+  );
+
 
   try{
-    const constraints={advanced:[]};
 
-    if(capabilities.focusMode?.includes("continuous")){
-      constraints.advanced.push({focusMode:"continuous"});
-    }else if(capabilities.focusMode?.includes("single-shot")){
-      constraints.advanced.push({focusMode:"single-shot"});
+    const constraints={
+      advanced:[]
+    };
+
+
+    if(
+      capabilities.focusMode?.includes("continuous")
+    ){
+
+      constraints.advanced.push({
+        focusMode:"continuous"
+      });
+
+    }else if(
+      capabilities.focusMode?.includes("single-shot")
+    ){
+
+      constraints.advanced.push({
+        focusMode:"single-shot"
+      });
+
     }
+
 
     if(capabilities.pointsOfInterest){
-      constraints.advanced.push({pointsOfInterest:[{x:x*100,y:y*100}]});
+
+      constraints.advanced.push({
+        pointsOfInterest:[
+          {
+            x:x*100,
+            y:y*100
+          }
+        ]
+      });
+
     }
+
 
     if(constraints.advanced.length){
-      await track.applyConstraints(constraints);
+
+      await track.applyConstraints(
+        constraints
+      );
+
     }
 
-    message.style.left=(x*100)+"%";
-    message.style.top=(y*100)+"%";
+
+    message.style.left=
+      (x*100)+"%";
+
+    message.style.top=
+      (y*100)+"%";
+
     message.style.opacity="1";
-    clearTimeout(window.focusMessageTimer);
-    window.focusMessageTimer=setTimeout(()=>{
-      message.style.opacity="0";
-    },700);
+
+
+    clearTimeout(
+      window.focusMessageTimer
+    );
+
+
+    window.focusMessageTimer=
+      setTimeout(()=>{
+
+        message.style.opacity="0";
+
+      },700);
+
 
     status.textContent="Odaklandı.";
+
+
   }catch(error){
+
     console.warn(error);
-    status.textContent="Odaklama desteklenmiyor.";
+
+    status.textContent=
+      "Odaklama desteklenmiyor.";
+
   }
+
 }
 
+
 function attachFocusHandler(){
-  const video=document.querySelector("#reader video");
-  if(!video || video.dataset.focusAttached==="1")return;
+
+  const video=document.querySelector(
+    "#reader video"
+  );
+
+
+  if(
+    !video ||
+    video.dataset.focusAttached==="1"
+  )
+
+    return;
+
+
   video.dataset.focusAttached="1";
-  video.addEventListener("click",focusCamera);
-  video.addEventListener("touchend",event=>{
-    if(event.changedTouches?.[0]){
-      const touch=event.changedTouches[0];
-      focusCamera({
-        clientX:touch.clientX,
-        clientY:touch.clientY
-      });
+
+
+  video.addEventListener(
+    "click",
+    focusCamera
+  );
+
+
+  video.addEventListener(
+    "touchend",
+    event=>{
+
+      if(event.changedTouches?.[0]){
+
+        const touch=
+          event.changedTouches[0];
+
+
+        focusCamera({
+
+          clientX:touch.clientX,
+          clientY:touch.clientY
+
+        });
+
+      }
+
+    },
+    {
+      passive:true
     }
-  },{passive:true});
+  );
+
 }
 
 
 let focusHoldTimer=null;
 let focusActive=false;
 
+
 async function setContinuousFocus(active){
-  const video=document.querySelector("#reader video");
-  const track=video?.srcObject?.getVideoTracks?.()[0];
-  const status=document.getElementById("cameraStatus");
-  const button=document.getElementById("focusBtn");
+
+  const video=document.querySelector(
+    "#reader video"
+  );
+
+  const track=
+    video?.srcObject?.getVideoTracks?.()[0];
+
+  const status=
+    document.getElementById("cameraStatus");
+
+  const button=
+    document.getElementById("focusBtn");
+
 
   if(!track)return;
 
-  const capabilities=track.getCapabilities?.() || {};
+
+  const capabilities=
+    track.getCapabilities?.()||{};
+
 
   try{
+
     if(active){
-      if(capabilities.focusMode?.includes("continuous")){
-        await track.applyConstraints({advanced:[{focusMode:"continuous"}]});
+
+      if(
+        capabilities.focusMode?.includes("continuous")
+      ){
+
+        await track.applyConstraints({
+          advanced:[
+            {
+              focusMode:"continuous"
+            }
+          ]
+        });
+
+
         focusActive=true;
+
         button?.classList.add("on");
-        if(status)status.textContent="Sürekli odaklama açık.";
-      }else if(capabilities.focusMode?.includes("single-shot")){
-        await track.applyConstraints({advanced:[{focusMode:"single-shot"}]});
+
+        if(status)
+          status.textContent=
+            "Sürekli odaklama açık.";
+
+
+      }else if(
+        capabilities.focusMode?.includes("single-shot")
+      ){
+
+        await track.applyConstraints({
+          advanced:[
+            {
+              focusMode:"single-shot"
+            }
+          ]
+        });
+
+
         focusActive=true;
+
         button?.classList.add("on");
-        if(status)status.textContent="Odaklama yapılıyor...";
+
+        if(status)
+          status.textContent=
+            "Odaklama yapılıyor...";
+
+
       }else{
-        if(status)status.textContent="Bu cihazda odaklama desteği yok.";
+
+        if(status)
+          status.textContent=
+            "Bu cihazda odaklama desteği yok.";
+
       }
+
+
     }else{
+
       focusActive=false;
+
       button?.classList.remove("on");
-      if(status)status.textContent="Barkodu çerçevenin ortasında tut.";
+
+      if(status)
+        status.textContent=
+          "Barkodu çerçevenin ortasında tut.";
+
     }
+
+
   }catch(error){
+
     console.warn(error);
+
     focusActive=false;
+
     button?.classList.remove("on");
-    if(status)status.textContent="Odaklama desteklenmiyor.";
+
+    if(status)
+      status.textContent=
+        "Odaklama desteklenmiyor.";
+
   }
+
 }
 
+
 function setupFocusButton(){
-  const button=document.getElementById("focusBtn");
-  if(!button || button.dataset.bound==="1")return;
+
+  const button=
+    document.getElementById("focusBtn");
+
+
+  if(
+    !button ||
+    button.dataset.bound==="1"
+  )
+
+    return;
+
 
   button.dataset.bound="1";
 
+
   const start=e=>{
+
     e.preventDefault();
+
     clearTimeout(focusHoldTimer);
-    focusHoldTimer=setTimeout(()=>setContinuousFocus(true),180);
+
+
+    focusHoldTimer=
+      setTimeout(
+        ()=>setContinuousFocus(true),
+        180
+      );
+
   };
+
 
   const end=e=>{
+
     e.preventDefault();
+
     clearTimeout(focusHoldTimer);
-    if(focusActive)setContinuousFocus(false);
+
+
+    if(focusActive)
+      setContinuousFocus(false);
+
   };
 
-  button.addEventListener("pointerdown",start);
-  button.addEventListener("pointerup",end);
-  button.addEventListener("pointercancel",end);
-  button.addEventListener("pointerleave",end);
+
+  button.addEventListener(
+    "pointerdown",
+    start
+  );
+
+  button.addEventListener(
+    "pointerup",
+    end
+  );
+
+  button.addEventListener(
+    "pointercancel",
+    end
+  );
+
+  button.addEventListener(
+    "pointerleave",
+    end
+  );
+
 }
+
 
 async function startCamera(){
+
   if(scanner)return;
 
-  const status=document.getElementById("cameraStatus");
-  status.textContent="Kamera açılıyor...";
+
+  const status=
+    document.getElementById("cameraStatus");
+
+
+  status.textContent=
+    "Kamera açılıyor...";
+
 
   try{
-    if(!cameras.length)await getCameraList();
 
-    scanner=new Html5Qrcode("reader");
+    if(!cameras.length)
+      await getCameraList();
 
-    let cameraConfig={facingMode:"environment"};
+
+    scanner=
+      new Html5Qrcode("reader");
+
+
+    let cameraConfig={
+      facingMode:"environment"
+    };
+
 
     if(currentCameraId){
-      cameraConfig={deviceId:{exact:currentCameraId}};
+
+      cameraConfig={
+        deviceId:{
+          exact:currentCameraId
+        }
+      };
+
+
     }else if(cameras.length){
-      const backIndex=cameras.findIndex(camera=>/back|rear|environment|arka/i.test(camera.label||""));
+
+      const backIndex=
+        cameras.findIndex(
+          camera=>
+            /back|rear|environment|arka/i
+              .test(camera.label||"")
+        );
+
+
       if(backIndex>=0){
+
         cameraIndex=backIndex;
-        currentCameraId=cameras[backIndex].id;
-        cameraConfig={deviceId:{exact:currentCameraId}};
+
+        currentCameraId=
+          cameras[backIndex].id;
+
+
+        cameraConfig={
+          deviceId:{
+            exact:currentCameraId
+          }
+        };
+
       }
+
     }
+
 
     await scanner.start(
+
       cameraConfig,
-      {fps:10,qrbox:{width:300,height:160},aspectRatio:1.333333,disableFlip:true},
+
+      {
+        fps:10,
+        qrbox:{
+          width:300,
+          height:160
+        },
+        aspectRatio:1.333333,
+        disableFlip:true
+      },
+
+
       async barcode=>{
-        if(barcode===lastBarcode)return;
+
+        if(barcode===lastBarcode)
+          return;
+
 
         lastBarcode=barcode;
+
         await stopCamera();
+
         clearTimeout(manualTimer);
+
         showResult(barcode);
-        status.textContent="Barkod okundu.";
+
+        status.textContent=
+          "Barkod okundu.";
+
       },
+
+
       ()=>{}
+
     );
 
-    setTimeout(attachFocusHandler,200);
-    status.textContent="Barkodu çerçevenin ortasında tut. Odaklamak için görüntüye dokun.";
 
-    manualTimer=setTimeout(()=>{
-      document.getElementById("manualCard").classList.add("show");
-    },2000);
+    setTimeout(
+      attachFocusHandler,
+      200
+    );
+
+
+    status.textContent=
+      "Barkodu çerçevenin ortasında tut. Odaklamak için görüntüye dok.";
+
+
+    manualTimer=
+      setTimeout(()=>{
+
+        document
+          .getElementById("manualCard")
+          .classList.add("show");
+
+      },2000);
+
 
   }catch(error){
+
     console.error(error);
-    status.textContent="Kamera açılamadı.";
+
+    status.textContent=
+      "Kamera açılamadı.";
+
     scanner=null;
 
-    document.getElementById("manualCard").classList.add("show");
+
+    document
+      .getElementById("manualCard")
+      .classList.add("show");
+
   }
+
 }
+
 
 async function stopCamera(){
+
   if(!scanner)return;
 
+
   const active=scanner;
+
   scanner=null;
-  document.getElementById("reader")?.querySelector("#focusMessage")?.style && (document.getElementById("focusMessage").style.opacity="0");
+
+
+  document
+    .getElementById("reader")
+    ?.querySelector("#focusMessage")
+    ?.style
+    &&
+    (
+      document
+        .getElementById("focusMessage")
+        .style.opacity="0"
+    );
+
+
   focusActive=false;
-  document.getElementById("focusBtn")?.classList.remove("on");
+
+
+  document
+    .getElementById("focusBtn")
+    ?.classList.remove("on");
+
+
   flash=false;
+
   updateFlashButton();
-setupFocusButton();
+
+  setupFocusButton();
+
 
   try{
+
     await active.stop();
+
     await active.clear();
-  }catch(error){console.warn(error)}
+
+  }catch(error){
+
+    console.warn(error);
+
+  }
+
 }
+
 
 window.restartCamera=async()=>{
+
   await stopCamera();
+
   clearTimeout(manualTimer);
+
   lastBarcode="";
-  document.getElementById("scanResult").innerHTML="";
-  document.getElementById("addCard").classList.remove("show");
-  document.getElementById("manualCard").classList.remove("show");
+
+  document
+    .getElementById("scanResult")
+    .innerHTML="";
+
+  document
+    .getElementById("addCard")
+    .classList.remove("show");
+
+  document
+    .getElementById("manualCard")
+    .classList.remove("show");
+
   await startCamera();
+
 };
+
 
 window.switchCamera=async()=>{
-  const status=document.getElementById("cameraStatus");
+
+  const status=
+    document.getElementById("cameraStatus");
+
 
   try{
+
     await stopCamera();
+
     clearTimeout(manualTimer);
+
     lastBarcode="";
 
-    if(!cameras.length)await getCameraList();
+
+    if(!cameras.length)
+      await getCameraList();
+
 
     if(cameras.length<2){
-      status.textContent="Bu cihazda başka kamera bulunamadı.";
+
+      status.textContent=
+        "Bu cihazda başka kamera bulunamadı.";
+
       await startCamera();
+
       return;
+
     }
 
-    cameraIndex=(cameraIndex+1)%cameras.length;
-    currentCameraId=cameras[cameraIndex].id;
 
-    document.getElementById("scanResult").innerHTML="";
-    document.getElementById("addCard").classList.remove("show");
-    document.getElementById("manualCard").classList.remove("show");
+    cameraIndex=
+      (cameraIndex+1)%cameras.length;
 
-    status.textContent="Kamera değiştiriliyor...";
+
+    currentCameraId=
+      cameras[cameraIndex].id;
+
+
+    document
+      .getElementById("scanResult")
+      .innerHTML="";
+
+
+    document
+      .getElementById("addCard")
+      .classList.remove("show");
+
+
+    document
+      .getElementById("manualCard")
+      .classList.remove("show");
+
+
+    status.textContent=
+      "Kamera değiştiriliyor...";
+
+
     await startCamera();
+
+
   }catch(error){
+
     console.error(error);
-    status.textContent="Kamera değiştirilemedi.";
+
+    status.textContent=
+      "Kamera değiştirilemedi.";
+
     await startCamera();
+
   }
+
 };
+
 
 function updateFlashButton(){
-  const button=document.getElementById("flashBtn");
-  button.classList.toggle("on",flash);
-  button.innerHTML=flash
-    ?'<span class="mi">flash_off</span>Flaş Kapat'
-    :'<span class="mi">flash_on</span>Flaş Aç';
+
+  const button=
+    document.getElementById("flashBtn");
+
+
+  button.classList.toggle(
+    "on",
+    flash
+  );
+
+
+  button.innerHTML=
+
+    flash
+
+    ?
+
+    '<span class="mi">flash_off</span>Flaş Kapat'
+
+    :
+
+    '<span class="mi">flash_on</span>Flaş Aç';
+
 }
 
+
 window.toggleFlash=async()=>{
-  const track=document.querySelector("#reader video")?.srcObject?.getVideoTracks?.()[0];
-  const status=document.getElementById("cameraStatus");
+
+  const track=
+    document
+      .querySelector("#reader video")
+      ?.srcObject
+      ?.getVideoTracks?.()[0];
+
+
+  const status=
+    document.getElementById("cameraStatus");
+
 
   if(!track){
-    status.textContent="Önce kameranın açılmasını bekle.";
+
+    status.textContent=
+      "Önce kameranın açılmasını bekle.";
+
     return;
+
   }
+
 
   try{
-    if(!track.getCapabilities?.().torch){
-      status.textContent="Bu tarayıcıda flaş kontrolü desteklenmiyor.";
+
+    if(
+      !track.getCapabilities?.().torch
+    ){
+
+      status.textContent=
+        "Bu tarayıcıda flaş kontrolü desteklenmiyor.";
+
       return;
+
     }
 
+
     flash=!flash;
-    await track.applyConstraints({advanced:[{torch:flash}]});
+
+
+    await track.applyConstraints({
+
+      advanced:[
+        {
+          torch:flash
+        }
+      ]
+
+    });
+
+
     updateFlashButton();
-    status.textContent=flash?"Flaş açık.":"Flaş kapalı.";
+
+
+    status.textContent=
+      flash
+      ?"Flaş açık."
+      :"Flaş kapalı.";
+
 
   }catch(error){
+
     flash=false;
+
     updateFlashButton();
-    status.textContent="Flaş açılamadı.";
+
+    status.textContent=
+      "Flaş açılamadı.";
+
   }
+
 };
 
+
 window.scanGallery=async event=>{
-  const file=event.target.files?.[0];
+
+  const file=
+    event.target.files?.[0];
+
+
   event.target.value="";
+
 
   if(!file)return;
 
+
   await stopCamera();
+
   clearTimeout(manualTimer);
-  document.getElementById("manualCard").classList.add("show");
-  document.getElementById("addCard").classList.remove("show");
-  document.getElementById("scanResult").innerHTML="";
+
+
+  document
+    .getElementById("manualCard")
+    .classList.add("show");
+
+
+  document
+    .getElementById("addCard")
+    .classList.remove("show");
+
+
+  document
+    .getElementById("scanResult")
+    .innerHTML="";
+
+
   show("scan");
 
-  const status=document.getElementById("cameraStatus");
-  status.textContent="Fotoğraftaki barkod okunuyor...";
 
-  const imageUrl=URL.createObjectURL(file);
+  const status=
+    document.getElementById("cameraStatus");
+
+
+  status.textContent=
+    "Fotoğraftaki barkod okunuyor...";
+
+
+  const imageUrl=
+    URL.createObjectURL(file);
+
 
   Quagga.decodeSingle(
+
     {
+
       src:imageUrl,
+
       numOfWorkers:0,
-      inputStream:{size:1200},
-      locator:{patchSize:"medium",halfSample:false},
-      decoder:{readers:["ean_reader","ean_8_reader","upc_reader","upc_e_reader","code_128_reader","code_39_reader"]}
+
+      inputStream:{
+        size:1200
+      },
+
+      locator:{
+        patchSize:"medium",
+        halfSample:false
+      },
+
+      decoder:{
+        readers:[
+          "ean_reader",
+          "ean_8_reader",
+          "upc_reader",
+          "upc_e_reader",
+          "code_128_reader",
+          "code_39_reader"
+        ]
+      }
+
     },
+
+
     result=>{
+
       URL.revokeObjectURL(imageUrl);
 
+
       if(result?.codeResult?.code){
-        showResult(result.codeResult.code);
-        status.textContent="Fotoğraftaki barkod okundu.";
+
+        showResult(
+          result.codeResult.code
+        );
+
+        status.textContent=
+          "Fotoğraftaki barkod okundu.";
+
       }else{
-        status.textContent="Barkod okunamadı. Elle giriş yapabilirsin.";
+
+        status.textContent=
+          "Barkod okunamadı. Elle giriş yapabilirsin.";
+
       }
+
     }
+
   );
+
 };
 
+
 updateFlashButton();
+
+setupFocusButton();
+
 renderProducts();
+
 loadFirebase();
+
 </script>
+
 </body>
 </html>
+```
