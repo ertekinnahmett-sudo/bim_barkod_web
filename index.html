@@ -67,6 +67,7 @@ input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid
     <div class="controls">
       <button id="flashBtn" class="cam-btn" onclick="toggleFlash()"><span class="mi">flash_on</span>Flaş Aç</button>
       <button class="cam-btn" onclick="switchCamera()"><span class="mi">flip_camera_android</span>Kamera Değiştir</button>
+      <button id="focusBtn" class="cam-btn"><span class="mi">center_focus_strong</span>Odakla</button>
       <button class="cam-btn" onclick="restartCamera()"><span class="mi">refresh</span>Yeniden Tara</button>
     </div>
 
@@ -340,6 +341,72 @@ function attachFocusHandler(){
   },{passive:true});
 }
 
+
+let focusHoldTimer=null;
+let focusActive=false;
+
+async function setContinuousFocus(active){
+  const video=document.querySelector("#reader video");
+  const track=video?.srcObject?.getVideoTracks?.()[0];
+  const status=document.getElementById("cameraStatus");
+  const button=document.getElementById("focusBtn");
+
+  if(!track)return;
+
+  const capabilities=track.getCapabilities?.() || {};
+
+  try{
+    if(active){
+      if(capabilities.focusMode?.includes("continuous")){
+        await track.applyConstraints({advanced:[{focusMode:"continuous"}]});
+        focusActive=true;
+        button?.classList.add("on");
+        if(status)status.textContent="Sürekli odaklama açık.";
+      }else if(capabilities.focusMode?.includes("single-shot")){
+        await track.applyConstraints({advanced:[{focusMode:"single-shot"}]});
+        focusActive=true;
+        button?.classList.add("on");
+        if(status)status.textContent="Odaklama yapılıyor...";
+      }else{
+        if(status)status.textContent="Bu cihazda odaklama desteği yok.";
+      }
+    }else{
+      focusActive=false;
+      button?.classList.remove("on");
+      if(status)status.textContent="Barkodu çerçevenin ortasında tut.";
+    }
+  }catch(error){
+    console.warn(error);
+    focusActive=false;
+    button?.classList.remove("on");
+    if(status)status.textContent="Odaklama desteklenmiyor.";
+  }
+}
+
+function setupFocusButton(){
+  const button=document.getElementById("focusBtn");
+  if(!button || button.dataset.bound==="1")return;
+
+  button.dataset.bound="1";
+
+  const start=e=>{
+    e.preventDefault();
+    clearTimeout(focusHoldTimer);
+    focusHoldTimer=setTimeout(()=>setContinuousFocus(true),180);
+  };
+
+  const end=e=>{
+    e.preventDefault();
+    clearTimeout(focusHoldTimer);
+    if(focusActive)setContinuousFocus(false);
+  };
+
+  button.addEventListener("pointerdown",start);
+  button.addEventListener("pointerup",end);
+  button.addEventListener("pointercancel",end);
+  button.addEventListener("pointerleave",end);
+}
+
 async function startCamera(){
   if(scanner)return;
 
@@ -401,8 +468,11 @@ async function stopCamera(){
   const active=scanner;
   scanner=null;
   document.getElementById("reader")?.querySelector("#focusMessage")?.style && (document.getElementById("focusMessage").style.opacity="0");
+  focusActive=false;
+  document.getElementById("focusBtn")?.classList.remove("on");
   flash=false;
   updateFlashButton();
+setupFocusButton();
 
   try{
     await active.stop();
