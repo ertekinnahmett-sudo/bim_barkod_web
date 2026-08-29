@@ -84,7 +84,6 @@ input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid
   <div id="addCard" class="card add-card">
     <h2>Yeni barkodu kaydet</h2>
     <input id="newBarcode" readonly>
-    <input id="productName" placeholder="Ürün adı">
     <input id="shortCode" placeholder="Kısa kasa kodu">
     <button class="save" onclick="saveProduct()">Kaydet</button>
   </div>
@@ -206,11 +205,10 @@ function showResult(barcode){
   }
 
   document.getElementById("newBarcode").value=barcode;
-  document.getElementById("productName").value="";
   document.getElementById("shortCode").value="";
   result.innerHTML=`<div class="result-box"><strong>Bu barkod kayıtlı değil</strong>Barkod: ${safe(barcode)}</div>`;
   addCard.classList.add("show");
-  document.getElementById("productName").focus();
+  document.getElementById("shortCode").focus();
 }
 
 window.searchManualBarcode=()=>{
@@ -226,18 +224,17 @@ window.searchManualBarcode=()=>{
 
 window.saveProduct=async()=>{
   const barkod=document.getElementById("newBarcode").value.trim();
-  const ad=document.getElementById("productName").value.trim();
   const kod=document.getElementById("shortCode").value.trim();
 
-  if(!ad||!kod){
-    alert("Lütfen ürün adını ve kısa kasa kodunu yaz.");
+  if(!kod){
+    alert("Lütfen kısa kasa kodunu yaz.");
     return;
   }
 
   try{
-    await setDoc(doc(db,"barkodlar",barkod),{ad,barkod,kisakod:kod,tarih:serverTimestamp()},{merge:true});
+    await setDoc(doc(db,"barkodlar",barkod),{barkod,kisakod:kod,tarih:serverTimestamp()},{merge:true});
 
-    const product={ad,barkod,kod};
+    const product={ad:"",barkod,kod};
     const index=products.findIndex(item=>item.barkod===barkod);
 
     if(index<0)products.push(product);
