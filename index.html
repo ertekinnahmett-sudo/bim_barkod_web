@@ -14,86 +14,329 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
 
 <style>
-:root{--bg:#fff9f7;--text:#24201f;--red:#a75a50;--soft:#5e4d49;--pale:#fff0ed}
+:root{
+  --bg:#fff9f7;
+  --text:#24201f;
+  --red:#a75a50;
+  --soft:#5e4d49;
+  --pale:#fff0ed
+}
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-button,input{font:inherit}
-button{cursor:pointer}
-.app{width:min(100%,520px);min-height:100vh;margin:auto;padding:28px 28px 38px}
-.screen{display:none}
-.screen.active{display:block}
-.mi{font-family:"Material Symbols Outlined";font-weight:normal;font-style:normal;vertical-align:middle}
 
-.home-title{text-align:center;font-size:30px;font-weight:400;margin:45px 0 0}
-.hero{min-height:500px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:34px;text-align:center}
-.scan-icon{font-size:130px;line-height:1;margin-bottom:34px}
-.brand{font-size:43px;margin:0;font-weight:700}
-.desc{font-size:23px;margin:24px 0 0}
-.home-buttons{display:grid;gap:20px}
-.home-btn{min-height:64px;border-radius:34px;font-size:20px;display:flex;align-items:center;justify-content:center;gap:12px}
-.scan-btn{border:1px solid #f0ded9;background:var(--pale);color:var(--red);box-shadow:0 3px 4px #41272228}
-.gallery-btn{border:1px solid #ecd5d0;background:#fff;color:var(--red)}
-.saved-btn{border:1.5px solid #766866;background:transparent;color:var(--red)}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif
+}
 
-.top{min-height:54px;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;margin-bottom:24px}
-.top h1{text-align:center;font-size:23px;margin:0}
-.back{width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--text)}
+button,input{
+  font:inherit
+}
 
-.card{padding:18px;border:1px solid #eee3e0;border-radius:22px;background:#fff;box-shadow:0 5px 18px #36262312}
-#reader{min-height:160px;overflow:hidden;border-radius:14px}
-#reader video{border-radius:12px}
-#reader{position:relative}
-#focusMessage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:8px 12px;border-radius:12px;background:#0008;color:#fff;font-size:14px;pointer-events:none;opacity:0;transition:opacity .2s}
+button{
+  cursor:pointer
+}
 
-.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
-.cam-btn{min-height:50px;border:1px solid #e3d4d0;border-radius:14px;background:#fff7f5;color:var(--red);font-weight:700}
-.cam-btn.on{background:var(--red);border-color:var(--red);color:#fff}
+.app{
+  width:min(100%,520px);
+  min-height:100vh;
+  margin:auto;
+  padding:28px 28px 38px
+}
 
-.status,.result{min-height:30px;margin-top:15px;color:var(--soft);text-align:center;line-height:1.45}
-.result-box{margin-top:16px;padding:18px;border-radius:16px;background:#fff4f1;text-align:left}
-.result-box strong{display:block;margin-bottom:9px;font-size:21px}
-.code{display:inline-block;margin-top:8px;color:var(--red);font-size:27px;font-weight:700}
+.screen{
+  display:none
+}
 
-.manual-card,.add-card,.edit-card{display:none;margin-top:18px}
-.manual-card.show,.add-card.show,.edit-card.show{display:block}
-.manual-card h2,.add-card h2,.edit-card h2{margin:0 0 10px;font-size:20px}
+.screen.active{
+  display:block
+}
 
-input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid #d8cbc7;border-radius:13px;outline-color:var(--red)}
-input[readonly]{background:#f7f0ee}
+.mi{
+  font-family:"Material Symbols Outlined";
+  font-weight:normal;
+  font-style:normal;
+  vertical-align:middle
+}
 
-.save{width:100%;min-height:52px;margin-top:10px;border:0;border-radius:14px;background:var(--red);color:#fff;font-weight:700}
+.home-title{
+  text-align:center;
+  font-size:30px;
+  font-weight:400;
+  margin:45px 0 0
+}
 
-.list{display:grid;gap:11px}
-.product{padding:15px;border:1px solid #eadeda;border-radius:15px;background:#fffdfc}
-.product strong{display:block;margin-bottom:8px;font-size:18px}
-.info{color:var(--soft);line-height:1.5}
+.hero{
+  min-height:500px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  padding-bottom:34px;
+  text-align:center
+}
+
+.scan-icon{
+  font-size:130px;
+  line-height:1;
+  margin-bottom:34px
+}
+
+.brand{
+  font-size:43px;
+  margin:0;
+  font-weight:700
+}
+
+.desc{
+  font-size:23px;
+  margin:24px 0 0
+}
+
+.home-buttons{
+  display:grid;
+  gap:20px
+}
+
+.home-btn{
+  min-height:64px;
+  border-radius:34px;
+  font-size:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px
+}
+
+.scan-btn{
+  border:1px solid #f0ded9;
+  background:var(--pale);
+  color:var(--red);
+  box-shadow:0 3px 4px #41272228
+}
+
+.gallery-btn{
+  border:1px solid #ecd5d0;
+  background:#fff;
+  color:var(--red)
+}
+
+.saved-btn{
+  border:1.5px solid #766866;
+  background:transparent;
+  color:var(--red)
+}
+
+.top{
+  min-height:54px;
+  display:grid;
+  grid-template-columns:48px 1fr 48px;
+  align-items:center;
+  margin-bottom:24px
+}
+
+.top h1{
+  text-align:center;
+  font-size:23px;
+  margin:0
+}
+
+.back{
+  width:44px;
+  height:44px;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:var(--text)
+}
+
+.card{
+  padding:18px;
+  border:1px solid #eee3e0;
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 5px 18px #36262312
+}
+
+#reader{
+  min-height:160px;
+  overflow:hidden;
+  border-radius:14px;
+  position:relative
+}
+
+#reader video{
+  border-radius:12px
+}
+
+#focusMessage{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  padding:8px 12px;
+  border-radius:12px;
+  background:#0008;
+  color:#fff;
+  font-size:14px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .2s
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px
+}
+
+.cam-btn{
+  min-height:50px;
+  border:1px solid #e3d4d0;
+  border-radius:14px;
+  background:#fff7f5;
+  color:var(--red);
+  font-weight:700
+}
+
+.cam-btn.on{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff
+}
+
+.status,.result{
+  min-height:30px;
+  margin-top:15px;
+  color:var(--soft);
+  text-align:center;
+  line-height:1.45
+}
+
+.result-box{
+  margin-top:16px;
+  padding:18px;
+  border-radius:16px;
+  background:#fff4f1;
+  text-align:left
+}
+
+.result-box strong{
+  display:block;
+  margin-bottom:9px;
+  font-size:21px
+}
+
+.code{
+  display:inline-block;
+  margin-top:8px;
+  color:var(--red);
+  font-size:27px;
+  font-weight:700
+}
+
+.manual-card,
+.add-card,
+.edit-card{
+  display:none;
+  margin-top:18px
+}
+
+.manual-card.show,
+.add-card.show,
+.edit-card.show{
+  display:block
+}
+
+.manual-card h2,
+.add-card h2,
+.edit-card h2{
+  margin:0 0 10px;
+  font-size:20px
+}
+
+input{
+  width:100%;
+  min-height:52px;
+  margin:7px 0;
+  padding:12px 14px;
+  border:1px solid #d8cbc7;
+  border-radius:13px;
+  outline-color:var(--red)
+}
+
+input[readonly]{
+  background:#f7f0ee
+}
+
+.save{
+  width:100%;
+  min-height:52px;
+  margin-top:10px;
+  border:0;
+  border-radius:14px;
+  background:var(--red);
+  color:#fff;
+  font-weight:700
+}
+
+.list{
+  display:grid;
+  gap:11px
+}
+
+.product{
+  padding:15px;
+  border:1px solid #eadeda;
+  border-radius:15px;
+  background:#fffdfc
+}
+
+.product strong{
+  display:block;
+  margin-bottom:8px;
+  font-size:18px
+}
+
+.info{
+  color:var(--soft);
+  line-height:1.5
+}
 
 .product-actions{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:9px;
-  margin-top:13px;
+  margin-top:13px
 }
 
-.edit-btn,.delete-btn{
+.edit-btn,
+.delete-btn{
   min-height:44px;
   border-radius:12px;
-  font-weight:700;
+  font-weight:700
 }
 
 .edit-btn{
   border:1px solid #d8cbc7;
   background:#fff7f5;
-  color:var(--red);
+  color:var(--red)
 }
 
 .delete-btn{
   border:1px solid #e4c8c2;
   background:#fff;
-  color:#a33f35;
+  color:#a33f35
 }
 
-.empty{padding:32px 12px;text-align:center;color:var(--soft)}
+.empty{
+  padding:32px 12px;
+  text-align:center;
+  color:var(--soft)
+}
 
 @media(max-width:390px){
   .app{padding:20px}
@@ -108,6 +351,7 @@ input[readonly]{background:#f7f0ee}
 <main class="app">
 
 <section id="home" class="screen active">
+
   <h1 class="home-title">BİM Barkod</h1>
 
   <div class="hero">
@@ -117,125 +361,227 @@ input[readonly]{background:#f7f0ee}
   </div>
 
   <div class="home-buttons">
+
     <button class="home-btn scan-btn" onclick="openScan()">
-      <span class="mi">photo_camera</span>Barkod Tara
+      <span class="mi">photo_camera</span>
+      Barkod Tara
     </button>
 
     <button class="home-btn gallery-btn" onclick="document.getElementById('galleryInput').click()">
-      <span class="mi">photo_library</span>Galeriden Tara
+      <span class="mi">photo_library</span>
+      Galeriden Tara
     </button>
 
     <button class="home-btn saved-btn" onclick="openSaved()">
-      <span class="mi">format_list_bulleted</span>Kayıtlı Barkodlar
+      <span class="mi">format_list_bulleted</span>
+      Kayıtlı Barkodlar
     </button>
+
   </div>
 
-  <input id="galleryInput" type="file" accept="image/*" hidden onchange="scanGallery(event)">
+  <input
+    id="galleryInput"
+    type="file"
+    accept="image/*"
+    hidden
+    onchange="scanGallery(event)"
+  >
+
 </section>
 
 
 <section id="scan" class="screen">
+
   <div class="top">
+
     <button class="back" onclick="goHome()">
       <span class="mi">arrow_back</span>
     </button>
 
     <h1>Barkod Tara</h1>
+
     <span></span>
+
   </div>
+
 
   <div class="card">
+
     <div id="reader">
-      <div id="focusMessage">Odaklanıyor...</div>
+      <div id="focusMessage">
+        Odaklanıyor...
+      </div>
     </div>
+
 
     <div class="controls">
-      <button id="flashBtn" class="cam-btn" onclick="toggleFlash()">
-        <span class="mi">flash_on</span>Flaş Aç
+
+      <button
+        id="flashBtn"
+        class="cam-btn"
+        onclick="toggleFlash()"
+      >
+        <span class="mi">flash_on</span>
+        Flaş Aç
       </button>
 
-      <button class="cam-btn" onclick="switchCamera()">
-        <span class="mi">flip_camera_android</span>Kamera Değiştir
+
+      <button
+        class="cam-btn"
+        onclick="switchCamera()"
+      >
+        <span class="mi">flip_camera_android</span>
+        Kamera Değiştir
       </button>
 
-      <button id="focusBtn" class="cam-btn">
-        <span class="mi">center_focus_strong</span>Odakla
+
+      <button
+        id="focusBtn"
+        class="cam-btn"
+      >
+        <span class="mi">center_focus_strong</span>
+        Odakla
       </button>
 
-      <button class="cam-btn" onclick="restartCamera()">
-        <span class="mi">refresh</span>Yeniden Tara
+
+      <button
+        class="cam-btn"
+        onclick="restartCamera()"
+      >
+        <span class="mi">refresh</span>
+        Yeniden Tara
       </button>
+
     </div>
 
+
     <div id="cameraStatus" class="status"></div>
+
     <div id="scanResult" class="result"></div>
+
   </div>
+
 
   <div id="manualCard" class="card manual-card">
+
     <h2>Barkodu Elle Gir</h2>
 
-    <input id="manualBarcode" inputmode="numeric" placeholder="Barkod numarasını yaz">
+    <input
+      id="manualBarcode"
+      inputmode="numeric"
+      placeholder="Barkod numarasını yaz"
+    >
 
-    <button class="save" onclick="searchManualBarcode()">
+    <button
+      class="save"
+      onclick="searchManualBarcode()"
+    >
       Barkodu Ara
     </button>
+
   </div>
 
+
   <div id="addCard" class="card add-card">
+
     <h2>Yeni barkodu kaydet</h2>
 
     <input id="newBarcode" readonly>
 
-    <input id="shortCode" placeholder="Kısa kasa kodu">
+    <input
+      id="shortCode"
+      placeholder="Kısa kasa kodu"
+    >
 
-    <button class="save" onclick="saveProduct()">
+    <button
+      class="save"
+      onclick="saveProduct()"
+    >
       Kaydet
     </button>
+
   </div>
+
 </section>
 
 
 <section id="saved" class="screen">
+
   <div class="top">
-    <button class="back" onclick="goHome()">
+
+    <button
+      class="back"
+      onclick="goHome()"
+    >
       <span class="mi">arrow_back</span>
     </button>
 
     <h1>Kayıtlı Barkodlar</h1>
+
     <span></span>
+
   </div>
+
 
   <div class="card">
-    <input id="search" placeholder="Barkod veya ürün ara" oninput="renderProducts()">
 
-    <div id="productList" class="list"></div>
+    <input
+      id="search"
+      placeholder="Barkod veya ürün ara"
+      oninput="renderProducts()"
+    >
+
+    <div
+      id="productList"
+      class="list"
+    ></div>
+
   </div>
+
 </section>
 
 
-<!-- DÜZENLEME EKRANI -->
 <section id="edit" class="screen">
 
   <div class="top">
-    <button class="back" onclick="closeEdit()">
+
+    <button
+      class="back"
+      onclick="closeEdit()"
+    >
       <span class="mi">arrow_back</span>
     </button>
 
     <h1>Barkodu Düzenle</h1>
+
     <span></span>
+
   </div>
+
 
   <div class="card edit-card show">
 
     <h2>Ürün bilgilerini düzenle</h2>
 
-    <input id="editBarcode" readonly>
+    <input
+      id="editBarcode"
+      readonly
+    >
 
-    <input id="editName" placeholder="Ürün adı">
+    <input
+      id="editName"
+      placeholder="Ürün adı"
+    >
 
-    <input id="editShortCode" placeholder="Kısa kasa kodu">
+    <input
+      id="editShortCode"
+      placeholder="Kısa kasa kodu"
+    >
 
-    <button class="save" onclick="updateProduct()">
+    <button
+      class="save"
+      onclick="updateProduct()"
+    >
       Kaydet
     </button>
 
@@ -264,57 +610,81 @@ import {
 
 
 const app=initializeApp({
+
   apiKey:"AIzaSyBIrLxs1fmO9kLDTU0ot6loZzUeBRGY9Zk",
+
   authDomain:"bim-kod.firebaseapp.com",
+
   projectId:"bim-kod",
+
   storageBucket:"bim-kod.firebasestorage.app",
+
   messagingSenderId:"212381326013",
+
   appId:"1:212381326013:web:232e46710316de346ab5d4"
+
 });
 
 
 const db=getFirestore(app);
 
-let products=JSON.parse(localStorage.getItem("bimBarkodUrunler"))||[];
+
+let products=
+  JSON.parse(
+    localStorage.getItem(
+      "bimBarkodUrunler"
+    )
+  )||[];
+
 
 let scanner=null;
+
 let flash=false;
+
 let lastBarcode="";
+
 let manualTimer=null;
+
 let cameras=[];
+
 let cameraIndex=0;
+
 let currentCameraId=null;
 
 let editingBarcode="";
 
 
-const safe=value=>String(value||"")
-  .replaceAll("&","&amp;")
-  .replaceAll("<","&lt;")
-  .replaceAll(">","&gt;")
-  .replaceAll('"',"&quot;")
-  .replaceAll("'","&#039;");
+const safe=value=>
+  String(value||"")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 
-const localSave=()=>{
+const localSave=()=>
   localStorage.setItem(
     "bimBarkodUrunler",
     JSON.stringify(products)
   );
-};
 
 
 function show(id){
 
   document
     .querySelectorAll(".screen")
-    .forEach(screen=>screen.classList.remove("active"));
+    .forEach(
+      screen=>
+        screen.classList.remove("active")
+    );
 
   document
     .getElementById(id)
     .classList.add("active");
 
   window.scrollTo(0,0);
+
 }
 
 
@@ -322,45 +692,75 @@ async function loadFirebase(){
 
   try{
 
-    const snapshot=await getDocs(
-      collection(db,"barkodlar")
-    );
+    const snapshot=
+      await getDocs(
+        collection(
+          db,
+          "barkodlar"
+        )
+      );
 
-    const merged=new Map(
-      products.map(product=>[
-        product.barkod,
-        product
-      ])
-    );
+
+    const merged=
+      new Map(
+        products.map(
+          product=>[
+            product.barkod,
+            product
+          ]
+        )
+      );
 
 
     snapshot.docs.forEach(item=>{
 
       const data=item.data();
 
+
       merged.set(
+
         data.barkod||item.id,
+
         {
-          ad:data.ad||data.urunAdi||"Ürün adı girilmemiş",
-          barkod:data.barkod||item.id,
-          kod:data.kisakod||data.kisaKod||data.kod||""
+
+          ad:
+            data.ad||
+            data.urunAdi||
+            "Ürün adı girilmemiş",
+
+          barkod:
+            data.barkod||
+            item.id,
+
+          kod:
+            data.kisakod||
+            data.kisaKod||
+            data.kod||
+            ""
+
         }
+
       );
 
     });
 
 
-    products=[...merged.values()];
+    products=[
+      ...merged.values()
+    ];
+
 
     localSave();
 
     renderProducts();
+
 
   }catch(error){
 
     console.error(error);
 
   }
+
 }
 
 
@@ -370,19 +770,24 @@ window.goHome=async()=>{
 
   clearTimeout(manualTimer);
 
+
   document
     .getElementById("manualCard")
     .classList.remove("show");
+
 
   document
     .getElementById("addCard")
     .classList.remove("show");
 
+
   document
     .getElementById("scanResult")
     .innerHTML="";
 
+
   show("home");
+
 };
 
 
@@ -392,21 +797,27 @@ window.openScan=async()=>{
     .getElementById("manualCard")
     .classList.remove("show");
 
+
   document
     .getElementById("addCard")
     .classList.remove("show");
+
 
   document
     .getElementById("scanResult")
     .innerHTML="";
 
+
   document
     .getElementById("manualBarcode")
     .value="";
 
+
   show("scan");
 
+
   await startCamera();
+
 };
 
 
@@ -421,98 +832,123 @@ window.openSaved=()=>{
 
 window.renderProducts=()=>{
 
-  const q=document
-    .getElementById("search")
-    .value
-    .toLowerCase()
-    .trim();
-
-
-  const list=products.filter(product=>
-
-    String(product.ad)
+  const q=
+    document
+      .getElementById("search")
+      .value
       .toLowerCase()
-      .includes(q)
-
-    ||
-
-    String(product.barkod)
-      .includes(q)
-
-    ||
-
-    String(product.kod)
-      .includes(q)
-
-  );
+      .trim();
 
 
-  document.getElementById("productList").innerHTML=
+  const list=
+    products.filter(product=>
 
-    list.length
+      String(product.ad)
+        .toLowerCase()
+        .includes(q)
 
-    ?
+      ||
 
-    list.map(product=>`
+      String(product.barkod)
+        .includes(q)
 
-      <article class="product">
+      ||
 
-        <strong>
-          ${safe(product.ad)}
-        </strong>
+      String(product.kod)
+        .includes(q)
 
-        <div class="info">
-          Barkod: ${safe(product.barkod)}
-          <br>
-          Kısa kod:
-          <b>${safe(product.kod)}</b>
-        </div>
+    );
 
-        <div class="product-actions">
 
-          <button
-            class="edit-btn"
-            onclick="editProduct('${safe(product.barkod)}')"
-          >
-            <span class="mi">edit</span>
-            Düzenle
-          </button>
+  document
+    .getElementById("productList")
+    .innerHTML=
 
-          <button
-            class="delete-btn"
-            onclick="deleteProduct('${safe(product.barkod)}')"
-          >
-            <span class="mi">delete</span>
-            Sil
-          </button>
+      list.length
 
-        </div>
+      ?
 
-      </article>
+      list.map(product=>`
 
-    `).join("")
+        <article class="product">
 
-    :
+          <strong>
+            ${safe(product.ad)}
+          </strong>
 
-    '<div class="empty">Henüz gösterilecek barkod yok.</div>';
+          <div class="info">
+
+            Barkod:
+            ${safe(product.barkod)}
+
+            <br>
+
+            Kısa kod:
+            <b>
+              ${safe(product.kod)}
+            </b>
+
+          </div>
+
+
+          <div class="product-actions">
+
+            <button
+              class="edit-btn"
+              onclick="editProduct('${safe(product.barkod)}')"
+            >
+              <span class="mi">edit</span>
+              Düzenle
+            </button>
+
+
+            <button
+              class="delete-btn"
+              onclick="deleteProduct('${safe(product.barkod)}')"
+            >
+              <span class="mi">delete</span>
+              Sil
+            </button>
+
+          </div>
+
+        </article>
+
+      `).join("")
+
+      :
+
+      '<div class="empty">Henüz gösterilecek barkod yok.</div>';
 
 };
 
 
 function showResult(barcode){
 
-  const product=products.find(
-    item=>item.barkod===barcode
-  );
+  const product=
+    products.find(
+      item=>item.barkod===barcode
+    );
 
-  const result=document.getElementById("scanResult");
 
-  const addCard=document.getElementById("addCard");
+  const result=
+    document.getElementById(
+      "scanResult"
+    );
+
+
+  const addCard=
+    document.getElementById(
+      "addCard"
+    );
 
 
   if(product){
 
-    addCard.classList.remove("show");
+    addCard.classList.remove(
+      "show"
+    );
+
 
     result.innerHTML=`
 
@@ -538,12 +974,19 @@ function showResult(barcode){
     `;
 
     return;
+
   }
 
 
-  document.getElementById("newBarcode").value=barcode;
+  document
+    .getElementById("newBarcode")
+    .value=barcode;
 
-  document.getElementById("shortCode").value="";
+
+  document
+    .getElementById("shortCode")
+    .value="";
+
 
   result.innerHTML=`
 
@@ -560,7 +1003,11 @@ function showResult(barcode){
 
   `;
 
-  addCard.classList.add("show");
+
+  addCard.classList.add(
+    "show"
+  );
+
 
   document
     .getElementById("shortCode")
@@ -571,15 +1018,20 @@ function showResult(barcode){
 
 window.searchManualBarcode=()=>{
 
-  const barcode=document
-    .getElementById("manualBarcode")
-    .value
-    .trim();
+  const barcode=
+    document
+      .getElementById(
+        "manualBarcode"
+      )
+      .value
+      .trim();
 
 
   if(!barcode){
 
-    alert("Lütfen barkod numarasını yaz.");
+    alert(
+      "Lütfen barkod numarasını yaz."
+    );
 
     return;
 
@@ -593,20 +1045,29 @@ window.searchManualBarcode=()=>{
 
 window.saveProduct=async()=>{
 
-  const barkod=document
-    .getElementById("newBarcode")
-    .value
-    .trim();
+  const barkod=
+    document
+      .getElementById(
+        "newBarcode"
+      )
+      .value
+      .trim();
 
-  const kod=document
-    .getElementById("shortCode")
-    .value
-    .trim();
+
+  const kod=
+    document
+      .getElementById(
+        "shortCode"
+      )
+      .value
+      .trim();
 
 
   if(!kod){
 
-    alert("Lütfen kısa kasa kodunu yaz.");
+    alert(
+      "Lütfen kısa kasa kodunu yaz."
+    );
 
     return;
 
@@ -616,15 +1077,23 @@ window.saveProduct=async()=>{
   try{
 
     await setDoc(
-      doc(db,"barkodlar",barkod),
+
+      doc(
+        db,
+        "barkodlar",
+        barkod
+      ),
+
       {
         barkod,
         kisakod:kod,
         tarih:serverTimestamp()
       },
+
       {
         merge:true
       }
+
     );
 
 
@@ -635,9 +1104,10 @@ window.saveProduct=async()=>{
     };
 
 
-    const index=products.findIndex(
-      item=>item.barkod===barkod
-    );
+    const index=
+      products.findIndex(
+        item=>item.barkod===barkod
+      );
 
 
     if(index<0)
@@ -653,9 +1123,13 @@ window.saveProduct=async()=>{
 
     renderProducts();
 
+
     document
       .getElementById("addCard")
-      .classList.remove("show");
+      .classList.remove(
+        "show"
+      );
+
 
     showResult(barkod);
 
@@ -664,27 +1138,32 @@ window.saveProduct=async()=>{
 
     console.error(error);
 
-    alert("Ürün Firebase'e kaydedilemedi.");
+    alert(
+      "Ürün Firebase'e kaydedilemedi."
+    );
 
   }
 
 };
 
 
-/* =========================
+/* =========================================
    DÜZENLE
-========================= */
+========================================= */
 
 window.editProduct=(barcode)=>{
 
-  const product=products.find(
-    item=>item.barkod===barcode
-  );
+  const product=
+    products.find(
+      item=>item.barkod===barcode
+    );
 
 
   if(!product){
 
-    alert("Ürün bulunamadı.");
+    alert(
+      "Ürün bulunamadı."
+    );
 
     return;
 
@@ -695,17 +1174,23 @@ window.editProduct=(barcode)=>{
 
 
   document
-    .getElementById("editBarcode")
+    .getElementById(
+      "editBarcode"
+    )
     .value=product.barkod;
 
 
   document
-    .getElementById("editName")
+    .getElementById(
+      "editName"
+    )
     .value=product.ad||"";
 
 
   document
-    .getElementById("editShortCode")
+    .getElementById(
+      "editShortCode"
+    )
     .value=product.kod||"";
 
 
@@ -727,28 +1212,38 @@ window.updateProduct=async()=>{
 
   if(!editingBarcode){
 
-    alert("Düzenlenecek ürün bulunamadı.");
+    alert(
+      "Düzenlenecek ürün bulunamadı."
+    );
 
     return;
 
   }
 
 
-  const name=document
-    .getElementById("editName")
-    .value
-    .trim();
+  const name=
+    document
+      .getElementById(
+        "editName"
+      )
+      .value
+      .trim();
 
 
-  const kod=document
-    .getElementById("editShortCode")
-    .value
-    .trim();
+  const kod=
+    document
+      .getElementById(
+        "editShortCode"
+      )
+      .value
+      .trim();
 
 
   if(!kod){
 
-    alert("Lütfen kısa kasa kodunu yaz.");
+    alert(
+      "Lütfen kısa kasa kodunu yaz."
+    );
 
     return;
 
@@ -766,10 +1261,15 @@ window.updateProduct=async()=>{
       ),
 
       {
+
         barkod:editingBarcode,
+
         ad:name,
+
         kisakod:kod,
+
         tarih:serverTimestamp()
+
       },
 
       {
@@ -779,17 +1279,23 @@ window.updateProduct=async()=>{
     );
 
 
-    const index=products.findIndex(
-      item=>item.barkod===editingBarcode
-    );
+    const index=
+      products.findIndex(
+        item=>
+          item.barkod===editingBarcode
+      );
 
 
     if(index>=0){
 
       products[index]={
+
         ...products[index],
+
         ad:name,
+
         kod:kod
+
       };
 
     }
@@ -799,7 +1305,11 @@ window.updateProduct=async()=>{
 
     editingBarcode="";
 
-    alert("Ürün başarıyla güncellendi.");
+
+    alert(
+      "Ürün başarıyla güncellendi."
+    );
+
 
     renderProducts();
 
@@ -810,50 +1320,50 @@ window.updateProduct=async()=>{
 
     console.error(error);
 
-    alert("Ürün güncellenemedi.");
+    alert(
+      "Ürün güncellenemedi."
+    );
 
   }
 
 };
 
 
-/* =========================
+/* =========================================
    SİL
-========================= */
+========================================= */
 
-window.deleteProduct=async(barcode)=>{
+window.deleteProduct=async barcode=>{
 
-  const product=products.find(
-    item=>item.barkod===barcode
-  );
+  const product=
+    products.find(
+      item=>item.barkod===barcode
+    );
 
 
   if(!product){
 
-    alert("Ürün bulunamadı.");
+    alert(
+      "Ürün bulunamadı."
+    );
 
     return;
 
   }
 
 
-  const confirmed=confirm(
+  const confirmed=
+    confirm(
 
-    "Bu barkodu silmek istediğine emin misin?\n\n"
+      "Bu barkodu silmek istediğine emin misin?\n\n"+
 
-    +
+      (product.ad||"Ürün")+
 
-    (product.ad||"Ürün")
+      "\nBarkod: "+
 
-    +
+      barcode
 
-    "\nBarkod: "
-
-    +
-
-    barcode
-
-  );
+    );
 
 
   if(!confirmed)return;
@@ -862,13 +1372,20 @@ window.deleteProduct=async(barcode)=>{
   try{
 
     await deleteDoc(
-      doc(db,"barkodlar",barcode)
+
+      doc(
+        db,
+        "barkodlar",
+        barcode
+      )
+
     );
 
 
-    products=products.filter(
-      item=>item.barkod!==barcode
-    );
+    products=
+      products.filter(
+        item=>item.barkod!==barcode
+      );
 
 
     localSave();
@@ -876,39 +1393,50 @@ window.deleteProduct=async(barcode)=>{
     renderProducts();
 
 
-    alert("Barkod başarıyla silindi.");
+    alert(
+      "Barkod başarıyla silindi."
+    );
+
 
   }catch(error){
 
     console.error(error);
 
-    alert("Barkod silinemedi.");
+    alert(
+      "Barkod silinemedi."
+    );
 
   }
 
 };
 
 
-/* =========================
+/* =========================================
    KAMERA
-========================= */
+========================================= */
 
 async function getCameraList(){
 
   try{
 
-    const list=await Html5Qrcode.getCameras();
+    const list=
+      await Html5Qrcode.getCameras();
 
-    cameras=Array.isArray(list)
+
+    cameras=
+      Array.isArray(list)
       ?list
       :[];
 
 
     if(currentCameraId){
 
-      const found=cameras.findIndex(
-        camera=>camera.id===currentCameraId
-      );
+      const found=
+        cameras.findIndex(
+          camera=>
+            camera.id===currentCameraId
+        );
+
 
       if(found>=0)
         cameraIndex=found;
@@ -917,6 +1445,7 @@ async function getCameraList(){
 
 
     return cameras;
+
 
   }catch(error){
 
@@ -933,18 +1462,28 @@ async function getCameraList(){
 
 async function focusCamera(event){
 
-  const video=document.querySelector(
-    "#reader video"
-  );
+  const video=
+    document.querySelector(
+      "#reader video"
+    );
+
 
   const track=
-    video?.srcObject?.getVideoTracks?.()[0];
+    video
+      ?.srcObject
+      ?.getVideoTracks?.()[0];
+
 
   const status=
-    document.getElementById("cameraStatus");
+    document.getElementById(
+      "cameraStatus"
+    );
+
 
   const message=
-    document.getElementById("focusMessage");
+    document.getElementById(
+      "focusMessage"
+    );
 
 
   if(!track){
@@ -978,22 +1517,26 @@ async function focusCamera(event){
     video.getBoundingClientRect();
 
 
-  const x=Math.max(
-    0,
-    Math.min(
-      1,
-      (event.clientX-rect.left)/rect.width
-    )
-  );
+  const x=
+    Math.max(
+      0,
+      Math.min(
+        1,
+        (event.clientX-rect.left)/
+        rect.width
+      )
+    );
 
 
-  const y=Math.max(
-    0,
-    Math.min(
-      1,
-      (event.clientY-rect.top)/rect.height
-    )
-  );
+  const y=
+    Math.max(
+      0,
+      Math.min(
+        1,
+        (event.clientY-rect.top)/
+        rect.height
+      )
+    );
 
 
   try{
@@ -1004,7 +1547,8 @@ async function focusCamera(event){
 
 
     if(
-      capabilities.focusMode?.includes("continuous")
+      capabilities.focusMode
+        ?.includes("continuous")
     ){
 
       constraints.advanced.push({
@@ -1012,7 +1556,8 @@ async function focusCamera(event){
       });
 
     }else if(
-      capabilities.focusMode?.includes("single-shot")
+      capabilities.focusMode
+        ?.includes("single-shot")
     ){
 
       constraints.advanced.push({
@@ -1025,12 +1570,14 @@ async function focusCamera(event){
     if(capabilities.pointsOfInterest){
 
       constraints.advanced.push({
+
         pointsOfInterest:[
           {
             x:x*100,
             y:y*100
           }
         ]
+
       });
 
     }
@@ -1067,7 +1614,8 @@ async function focusCamera(event){
       },700);
 
 
-    status.textContent="Odaklandı.";
+    status.textContent=
+      "Odaklandı.";
 
 
   }catch(error){
@@ -1084,16 +1632,16 @@ async function focusCamera(event){
 
 function attachFocusHandler(){
 
-  const video=document.querySelector(
-    "#reader video"
-  );
+  const video=
+    document.querySelector(
+      "#reader video"
+    );
 
 
   if(
     !video ||
     video.dataset.focusAttached==="1"
   )
-
     return;
 
 
@@ -1119,6 +1667,7 @@ function attachFocusHandler(){
         focusCamera({
 
           clientX:touch.clientX,
+
           clientY:touch.clientY
 
         });
@@ -1135,23 +1684,34 @@ function attachFocusHandler(){
 
 
 let focusHoldTimer=null;
+
 let focusActive=false;
 
 
 async function setContinuousFocus(active){
 
-  const video=document.querySelector(
-    "#reader video"
-  );
+  const video=
+    document.querySelector(
+      "#reader video"
+    );
+
 
   const track=
-    video?.srcObject?.getVideoTracks?.()[0];
+    video
+      ?.srcObject
+      ?.getVideoTracks?.()[0];
+
 
   const status=
-    document.getElementById("cameraStatus");
+    document.getElementById(
+      "cameraStatus"
+    );
+
 
   const button=
-    document.getElementById("focusBtn");
+    document.getElementById(
+      "focusBtn"
+    );
 
 
   if(!track)return;
@@ -1166,21 +1726,25 @@ async function setContinuousFocus(active){
     if(active){
 
       if(
-        capabilities.focusMode?.includes("continuous")
+        capabilities.focusMode
+          ?.includes("continuous")
       ){
 
         await track.applyConstraints({
+
           advanced:[
             {
               focusMode:"continuous"
             }
           ]
+
         });
 
 
         focusActive=true;
 
         button?.classList.add("on");
+
 
         if(status)
           status.textContent=
@@ -1188,21 +1752,25 @@ async function setContinuousFocus(active){
 
 
       }else if(
-        capabilities.focusMode?.includes("single-shot")
+        capabilities.focusMode
+          ?.includes("single-shot")
       ){
 
         await track.applyConstraints({
+
           advanced:[
             {
               focusMode:"single-shot"
             }
           ]
+
         });
 
 
         focusActive=true;
 
         button?.classList.add("on");
+
 
         if(status)
           status.textContent=
@@ -1224,6 +1792,7 @@ async function setContinuousFocus(active){
 
       button?.classList.remove("on");
 
+
       if(status)
         status.textContent=
           "Barkodu çerçevenin ortasında tut.";
@@ -1239,6 +1808,7 @@ async function setContinuousFocus(active){
 
     button?.classList.remove("on");
 
+
     if(status)
       status.textContent=
         "Odaklama desteklenmiyor.";
@@ -1251,14 +1821,15 @@ async function setContinuousFocus(active){
 function setupFocusButton(){
 
   const button=
-    document.getElementById("focusBtn");
+    document.getElementById(
+      "focusBtn"
+    );
 
 
   if(
     !button ||
     button.dataset.bound==="1"
   )
-
     return;
 
 
@@ -1269,7 +1840,9 @@ function setupFocusButton(){
 
     e.preventDefault();
 
-    clearTimeout(focusHoldTimer);
+    clearTimeout(
+      focusHoldTimer
+    );
 
 
     focusHoldTimer=
@@ -1285,7 +1858,9 @@ function setupFocusButton(){
 
     e.preventDefault();
 
-    clearTimeout(focusHoldTimer);
+    clearTimeout(
+      focusHoldTimer
+    );
 
 
     if(focusActive)
@@ -1299,15 +1874,18 @@ function setupFocusButton(){
     start
   );
 
+
   button.addEventListener(
     "pointerup",
     end
   );
 
+
   button.addEventListener(
     "pointercancel",
     end
   );
+
 
   button.addEventListener(
     "pointerleave",
@@ -1323,7 +1901,9 @@ async function startCamera(){
 
 
   const status=
-    document.getElementById("cameraStatus");
+    document.getElementById(
+      "cameraStatus"
+    );
 
 
   status.textContent=
@@ -1337,7 +1917,9 @@ async function startCamera(){
 
 
     scanner=
-      new Html5Qrcode("reader");
+      new Html5Qrcode(
+        "reader"
+      );
 
 
     let cameraConfig={
@@ -1360,7 +1942,9 @@ async function startCamera(){
         cameras.findIndex(
           camera=>
             /back|rear|environment|arka/i
-              .test(camera.label||"")
+              .test(
+                camera.label||""
+              )
         );
 
 
@@ -1388,29 +1972,41 @@ async function startCamera(){
       cameraConfig,
 
       {
+
         fps:10,
+
         qrbox:{
           width:300,
           height:160
         },
+
         aspectRatio:1.333333,
+
         disableFlip:true
+
       },
 
 
       async barcode=>{
 
-        if(barcode===lastBarcode)
+        if(
+          barcode===lastBarcode
+        )
           return;
 
 
         lastBarcode=barcode;
 
+
         await stopCamera();
 
-        clearTimeout(manualTimer);
+        clearTimeout(
+          manualTimer
+        );
+
 
         showResult(barcode);
+
 
         status.textContent=
           "Barkod okundu.";
@@ -1437,7 +2033,9 @@ async function startCamera(){
       setTimeout(()=>{
 
         document
-          .getElementById("manualCard")
+          .getElementById(
+            "manualCard"
+          )
           .classList.add("show");
 
       },2000);
@@ -1447,14 +2045,18 @@ async function startCamera(){
 
     console.error(error);
 
+
     status.textContent=
       "Kamera açılamadı.";
+
 
     scanner=null;
 
 
     document
-      .getElementById("manualCard")
+      .getElementById(
+        "manualCard"
+      )
       .classList.add("show");
 
   }
@@ -1473,15 +2075,8 @@ async function stopCamera(){
 
 
   document
-    .getElementById("reader")
-    ?.querySelector("#focusMessage")
-    ?.style
-    &&
-    (
-      document
-        .getElementById("focusMessage")
-        .style.opacity="0"
-    );
+    .getElementById("focusMessage")
+    .style.opacity="0";
 
 
   focusActive=false;
@@ -1518,21 +2113,37 @@ window.restartCamera=async()=>{
 
   await stopCamera();
 
-  clearTimeout(manualTimer);
+  clearTimeout(
+    manualTimer
+  );
 
   lastBarcode="";
 
+
   document
-    .getElementById("scanResult")
+    .getElementById(
+      "scanResult"
+    )
     .innerHTML="";
 
-  document
-    .getElementById("addCard")
-    .classList.remove("show");
 
   document
-    .getElementById("manualCard")
-    .classList.remove("show");
+    .getElementById(
+      "addCard"
+    )
+    .classList.remove(
+      "show"
+    );
+
+
+  document
+    .getElementById(
+      "manualCard"
+    )
+    .classList.remove(
+      "show"
+    );
+
 
   await startCamera();
 
@@ -1542,14 +2153,18 @@ window.restartCamera=async()=>{
 window.switchCamera=async()=>{
 
   const status=
-    document.getElementById("cameraStatus");
+    document.getElementById(
+      "cameraStatus"
+    );
 
 
   try{
 
     await stopCamera();
 
-    clearTimeout(manualTimer);
+    clearTimeout(
+      manualTimer
+    );
 
     lastBarcode="";
 
@@ -1571,7 +2186,8 @@ window.switchCamera=async()=>{
 
 
     cameraIndex=
-      (cameraIndex+1)%cameras.length;
+      (cameraIndex+1)%
+      cameras.length;
 
 
     currentCameraId=
@@ -1579,18 +2195,28 @@ window.switchCamera=async()=>{
 
 
     document
-      .getElementById("scanResult")
+      .getElementById(
+        "scanResult"
+      )
       .innerHTML="";
 
 
     document
-      .getElementById("addCard")
-      .classList.remove("show");
+      .getElementById(
+        "addCard"
+      )
+      .classList.remove(
+        "show"
+      );
 
 
     document
-      .getElementById("manualCard")
-      .classList.remove("show");
+      .getElementById(
+        "manualCard"
+      )
+      .classList.remove(
+        "show"
+      );
 
 
     status.textContent=
@@ -1617,7 +2243,9 @@ window.switchCamera=async()=>{
 function updateFlashButton(){
 
   const button=
-    document.getElementById("flashBtn");
+    document.getElementById(
+      "flashBtn"
+    );
 
 
   button.classList.toggle(
@@ -1645,13 +2273,17 @@ window.toggleFlash=async()=>{
 
   const track=
     document
-      .querySelector("#reader video")
+      .querySelector(
+        "#reader video"
+      )
       ?.srcObject
       ?.getVideoTracks?.()[0];
 
 
   const status=
-    document.getElementById("cameraStatus");
+    document.getElementById(
+      "cameraStatus"
+    );
 
 
   if(!track){
@@ -1667,7 +2299,8 @@ window.toggleFlash=async()=>{
   try{
 
     if(
-      !track.getCapabilities?.().torch
+      !track.getCapabilities?.()
+        .torch
     ){
 
       status.textContent=
@@ -1715,6 +2348,10 @@ window.toggleFlash=async()=>{
 };
 
 
+/* =========================================
+   GELİŞTİRİLMİŞ GALERİDEN TARAMA
+========================================= */
+
 window.scanGallery=async event=>{
 
   const file=
@@ -1729,21 +2366,33 @@ window.scanGallery=async event=>{
 
   await stopCamera();
 
-  clearTimeout(manualTimer);
+  clearTimeout(
+    manualTimer
+  );
 
 
   document
-    .getElementById("manualCard")
-    .classList.add("show");
+    .getElementById(
+      "manualCard"
+    )
+    .classList.remove(
+      "show"
+    );
 
 
   document
-    .getElementById("addCard")
-    .classList.remove("show");
+    .getElementById(
+      "addCard"
+    )
+    .classList.remove(
+      "show"
+    );
 
 
   document
-    .getElementById("scanResult")
+    .getElementById(
+      "scanResult"
+    )
     .innerHTML="";
 
 
@@ -1751,75 +2400,861 @@ window.scanGallery=async event=>{
 
 
   const status=
-    document.getElementById("cameraStatus");
+    document.getElementById(
+      "cameraStatus"
+    );
 
 
   status.textContent=
-    "Fotoğraftaki barkod okunuyor...";
+    "Fotoğraf hazırlanıyor...";
 
 
   const imageUrl=
     URL.createObjectURL(file);
 
 
-  Quagga.decodeSingle(
+  const image=
+    new Image();
 
-    {
 
-      src:imageUrl,
+  image.onload=()=>{
 
-      numOfWorkers:0,
+    try{
 
-      inputStream:{
-        size:1200
-      },
+      const originalWidth=
+        image.naturalWidth;
 
-      locator:{
-        patchSize:"medium",
-        halfSample:false
-      },
 
-      decoder:{
-        readers:[
-          "ean_reader",
-          "ean_8_reader",
-          "upc_reader",
-          "upc_e_reader",
-          "code_128_reader",
-          "code_39_reader"
-        ]
+      const originalHeight=
+        image.naturalHeight;
+
+
+      /*
+      -----------------------------------------
+      FOTOĞRAFI UYGUN BOYUTA GETİR
+      -----------------------------------------
+      */
+
+      const maxWidth=2400;
+
+
+      let width=
+        originalWidth;
+
+
+      let height=
+        originalHeight;
+
+
+      /*
+      Küçük fotoğrafları büyüt.
+      */
+
+      if(width<1600){
+
+        const scale=
+          1600/width;
+
+
+        width=
+          Math.round(
+            width*scale
+          );
+
+
+        height=
+          Math.round(
+            height*scale
+          );
+
       }
 
-    },
+
+      /*
+      Çok büyük fotoğrafları sınırla.
+      */
+
+      if(width>maxWidth){
+
+        const scale=
+          maxWidth/width;
 
 
-    result=>{
+        width=
+          Math.round(
+            width*scale
+          );
 
-      URL.revokeObjectURL(imageUrl);
+
+        height=
+          Math.round(
+            height*scale
+          );
+
+      }
 
 
-      if(result?.codeResult?.code){
+      /*
+      -----------------------------------------
+      ORİJİNAL CANVAS
+      -----------------------------------------
+      */
 
-        showResult(
-          result.codeResult.code
+      const canvas=
+        document.createElement(
+          "canvas"
         );
 
-        status.textContent=
-          "Fotoğraftaki barkod okundu.";
 
-      }else{
+      canvas.width=width;
 
-        status.textContent=
-          "Barkod okunamadı. Elle giriş yapabilirsin.";
+      canvas.height=height;
+
+
+      const ctx=
+        canvas.getContext(
+          "2d",
+          {
+            willReadFrequently:true
+          }
+        );
+
+
+      ctx.imageSmoothingEnabled=true;
+
+      ctx.imageSmoothingQuality=
+        "high";
+
+
+      ctx.drawImage(
+        image,
+        0,
+        0,
+        width,
+        height
+      );
+
+
+      const originalData=
+        ctx.getImageData(
+          0,
+          0,
+          width,
+          height
+        );
+
+
+      /*
+      =========================================
+      TARAMA İÇİN GÖRÜNTÜLER
+      =========================================
+      */
+
+      const images=[];
+
+
+      /*
+      1 — ORİJİNAL
+      */
+
+      images.push(
+        canvas.toDataURL(
+          "image/jpeg",
+          0.96
+        )
+      );
+
+
+      /*
+      2 — GRİ TONLAMA
+      */
+
+      const grayCanvas=
+        document.createElement(
+          "canvas"
+        );
+
+
+      grayCanvas.width=width;
+
+      grayCanvas.height=height;
+
+
+      const grayCtx=
+        grayCanvas.getContext(
+          "2d",
+          {
+            willReadFrequently:true
+          }
+        );
+
+
+      const grayData=
+        new ImageData(
+          new Uint8ClampedArray(
+            originalData.data
+          ),
+          width,
+          height
+        );
+
+
+      for(
+        let i=0;
+        i<grayData.data.length;
+        i+=4
+      ){
+
+        const r=
+          grayData.data[i];
+
+
+        const g=
+          grayData.data[i+1];
+
+
+        const b=
+          grayData.data[i+2];
+
+
+        const gray=
+          0.299*r+
+          0.587*g+
+          0.114*b;
+
+
+        grayData.data[i]=gray;
+
+        grayData.data[i+1]=gray;
+
+        grayData.data[i+2]=gray;
 
       }
+
+
+      grayCtx.putImageData(
+        grayData,
+        0,
+        0
+      );
+
+
+      images.push(
+        grayCanvas.toDataURL(
+          "image/jpeg",
+          0.96
+        )
+      );
+
+
+      /*
+      3 — KONTRAST
+      */
+
+      const contrastCanvas=
+        document.createElement(
+          "canvas"
+        );
+
+
+      contrastCanvas.width=width;
+
+      contrastCanvas.height=height;
+
+
+      const contrastCtx=
+        contrastCanvas.getContext(
+          "2d",
+          {
+            willReadFrequently:true
+          }
+        );
+
+
+      contrastCtx.drawImage(
+        grayCanvas,
+        0,
+        0
+      );
+
+
+      const contrastData=
+        contrastCtx.getImageData(
+          0,
+          0,
+          width,
+          height
+        );
+
+
+      const contrastFactor=1.8;
+
+
+      for(
+        let i=0;
+        i<contrastData.data.length;
+        i+=4
+      ){
+
+        let value=
+          contrastData.data[i];
+
+
+        value=
+          (
+            (value-128)*
+            contrastFactor
+          )+128;
+
+
+        value=
+          Math.max(
+            0,
+            Math.min(
+              255,
+              value
+            )
+          );
+
+
+        contrastData.data[i]=value;
+
+        contrastData.data[i+1]=value;
+
+        contrastData.data[i+2]=value;
+
+      }
+
+
+      contrastCtx.putImageData(
+        contrastData,
+        0,
+        0
+      );
+
+
+      images.push(
+        contrastCanvas.toDataURL(
+          "image/jpeg",
+          0.96
+        )
+      );
+
+
+      /*
+      4 — SİYAH / BEYAZ
+      */
+
+      const bwCanvas=
+        document.createElement(
+          "canvas"
+        );
+
+
+      bwCanvas.width=width;
+
+      bwCanvas.height=height;
+
+
+      const bwCtx=
+        bwCanvas.getContext(
+          "2d",
+          {
+            willReadFrequently:true
+          }
+        );
+
+
+      const bwData=
+        contrastCtx.getImageData(
+          0,
+          0,
+          width,
+          height
+        );
+
+
+      for(
+        let i=0;
+        i<bwData.data.length;
+        i+=4
+      ){
+
+        const value=
+          bwData.data[i];
+
+
+        const bw=
+          value>150
+          ?255
+          :0;
+
+
+        bwData.data[i]=bw;
+
+        bwData.data[i+1]=bw;
+
+        bwData.data[i+2]=bw;
+
+      }
+
+
+      bwCtx.putImageData(
+        bwData,
+        0,
+        0
+      );
+
+
+      images.push(
+        bwCanvas.toDataURL(
+          "image/jpeg",
+          0.96
+        )
+      );
+
+
+      /*
+      5 — KESKİNLEŞTİRİLMİŞ
+      */
+
+      const sharpCanvas=
+        document.createElement(
+          "canvas"
+        );
+
+
+      sharpCanvas.width=width;
+
+      sharpCanvas.height=height;
+
+
+      const sharpCtx=
+        sharpCanvas.getContext(
+          "2d",
+          {
+            willReadFrequently:true
+          }
+        );
+
+
+      sharpCtx.drawImage(
+        contrastCanvas,
+        0,
+        0
+      );
+
+
+      const sharpData=
+        sharpCtx.getImageData(
+          0,
+          0,
+          width,
+          height
+        );
+
+
+      const source=
+        new Uint8ClampedArray(
+          sharpData.data
+        );
+
+
+      for(
+        let y=1;
+        y<height-1;
+        y++
+      ){
+
+        for(
+          let x=1;
+          x<width-1;
+          x++
+        ){
+
+          const index=
+            (y*width+x)*4;
+
+
+          const up=
+            ((y-1)*width+x)*4;
+
+
+          const down=
+            ((y+1)*width+x)*4;
+
+
+          const left=
+            (y*width+x-1)*4;
+
+
+          const right=
+            (y*width+x+1)*4;
+
+
+          const center=
+            source[index];
+
+
+          const average=
+            (
+              source[up]+
+              source[down]+
+              source[left]+
+              source[right]
+            )/4;
+
+
+          let value=
+            center+
+            (center-average)*1.5;
+
+
+          value=
+            Math.max(
+              0,
+              Math.min(
+                255,
+                value
+              )
+            );
+
+
+          sharpData.data[index]=value;
+
+          sharpData.data[index+1]=value;
+
+          sharpData.data[index+2]=value;
+
+        }
+
+      }
+
+
+      sharpCtx.putImageData(
+        sharpData,
+        0,
+        0
+      );
+
+
+      images.push(
+        sharpCanvas.toDataURL(
+          "image/jpeg",
+          0.96
+        )
+      );
+
+
+      /*
+      =========================================
+      QUAGGA AYARLARI
+      =========================================
+      */
+
+      const configs=[
+
+        {
+          size:2400,
+          patchSize:"small",
+          halfSample:false
+        },
+
+        {
+          size:2000,
+          patchSize:"medium",
+          halfSample:false
+        },
+
+        {
+          size:1600,
+          patchSize:"large",
+          halfSample:false
+        },
+
+        {
+          size:2000,
+          patchSize:"x-large",
+          halfSample:false
+        },
+
+        {
+          size:1600,
+          patchSize:"small",
+          halfSample:true
+        }
+
+      ];
+
+
+      /*
+      Sadece market barkodlarında
+      kullanılan tipleri deniyoruz.
+      */
+
+      const readers=[
+
+        "ean_reader",
+
+        "ean_8_reader",
+
+        "upc_reader",
+
+        "upc_e_reader"
+
+      ];
+
+
+      let finished=false;
+
+
+      /*
+      =========================================
+      HER GÖRÜNTÜYÜ DENE
+      =========================================
+      */
+
+      const tryImage=
+        imageIndex=>{
+
+          if(finished)return;
+
+
+          if(
+            imageIndex>=images.length
+          ){
+
+            URL.revokeObjectURL(
+              imageUrl
+            );
+
+
+            status.innerHTML=
+              "Barkod okunamadı.<br>" +
+              "Barkodun fotoğrafta daha büyük ve net görünmesini deneyebilirsin.";
+
+
+            document
+              .getElementById(
+                "manualCard"
+              )
+              .classList.add(
+                "show"
+              );
+
+
+            return;
+
+          }
+
+
+          status.textContent=
+            "Görüntü işleniyor... " +
+            (imageIndex+1)+
+            "/"+
+            images.length;
+
+
+          const tryConfig=
+            configIndex=>{
+
+              if(finished)return;
+
+
+              if(
+                configIndex>=
+                configs.length
+              ){
+
+                setTimeout(
+                  ()=>tryImage(
+                    imageIndex+1
+                  ),
+                  50
+                );
+
+                return;
+
+              }
+
+
+              const config=
+                configs[
+                  configIndex
+                ];
+
+
+              status.textContent=
+                "Barkod aranıyor...";
+
+
+              Quagga.decodeSingle(
+
+                {
+
+                  src:
+                    images[
+                      imageIndex
+                    ],
+
+                  numOfWorkers:0,
+
+                  locate:true,
+
+                  inputStream:{
+
+                    size:
+                      config.size,
+
+                    singleChannel:false
+
+                  },
+
+                  locator:{
+
+                    patchSize:
+                      config.patchSize,
+
+                    halfSample:
+                      config.halfSample
+
+                  },
+
+                  decoder:{
+
+                    readers:
+                      readers
+
+                  }
+
+                },
+
+
+                result=>{
+
+                  const code=
+                    result
+                      ?.codeResult
+                      ?.code;
+
+
+                  if(code){
+
+                    const cleanCode=
+                      String(code)
+                        .replace(
+                          /\D/g,
+                          ""
+                        );
+
+
+                    if(
+
+                      cleanCode.length===8 ||
+
+                      cleanCode.length===12 ||
+
+                      cleanCode.length===13
+
+                    ){
+
+                      finished=true;
+
+
+                      URL.revokeObjectURL(
+                        imageUrl
+                      );
+
+
+                      showResult(
+                        cleanCode
+                      );
+
+
+                      status.textContent=
+                        "✓ Barkod başarıyla okundu.";
+
+
+                      return;
+
+                    }
+
+                  }
+
+
+                  setTimeout(
+
+                    ()=>tryConfig(
+                      configIndex+1
+                    ),
+
+                    50
+
+                  );
+
+                }
+
+              );
+
+            };
+
+
+          tryConfig(0);
+
+        };
+
+
+      tryImage(0);
+
+
+    }catch(error){
+
+      console.error(error);
+
+
+      URL.revokeObjectURL(
+        imageUrl
+      );
+
+
+      status.textContent=
+        "Fotoğraf işlenirken hata oluştu.";
+
+
+      document
+        .getElementById(
+          "manualCard"
+        )
+        .classList.add(
+          "show"
+        );
 
     }
 
-  );
+  };
+
+
+  image.onerror=()=>{
+
+    URL.revokeObjectURL(
+      imageUrl
+    );
+
+
+    status.textContent=
+      "Fotoğraf açılamadı.";
+
+  };
+
+
+  image.src=imageUrl;
 
 };
 
+
+/* =========================================
+   BAŞLANGIÇ
+========================================= */
 
 updateFlashButton();
 
