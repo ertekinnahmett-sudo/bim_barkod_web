@@ -22,8 +22,8 @@ button,input{font:inherit}button{cursor:pointer}.app{width:min(100%,520px);min-h
 .home-buttons{display:grid;gap:20px}.home-btn{min-height:64px;border-radius:34px;font-size:20px;display:flex;align-items:center;justify-content:center;gap:12px}
 .scan-btn{border:1px solid #f0ded9;background:var(--pale);color:var(--red);box-shadow:0 3px 4px #41272228}.gallery-btn{border:1px solid #ecd5d0;background:#fff;color:var(--red)}.saved-btn{border:1.5px solid #766866;background:transparent;color:var(--red)}
 .top{min-height:54px;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;margin-bottom:24px}.top h1{text-align:center;font-size:23px;margin:0}.back{width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--text)}
-.card{padding:18px;border:1px solid #eee3e0;border-radius:22px;background:#fff;box-shadow:0 5px 18px #36262312}#reader{min-height:160px;overflow:hidden;border-radius:14px}#reader video{border-radius:12px}#reader.front-camera video{transform:scaleX(-1)}
-.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.cam-btn{min-height:50px;border:1px solid #e3d4d0;border-radius:14px;background:#fff7f5;color:var(--red);font-weight:700}.cam-btn.on{background:var(--red);border-color:var(--red);color:#fff}
+.card{padding:18px;border:1px solid #eee3e0;border-radius:22px;background:#fff;box-shadow:0 5px 18px #36262312}#reader{min-height:160px;overflow:hidden;border-radius:14px}#reader video{border-radius:12px}#reader{position:relative}#focusMessage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:8px 12px;border-radius:12px;background:#0008;color:#fff;font-size:14px;pointer-events:none;opacity:0;transition:opacity .2s}
+.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}.cam-btn{min-height:50px;border:1px solid #e3d4d0;border-radius:14px;background:#fff7f5;color:var(--red);font-weight:700}.cam-btn.on{background:var(--red);border-color:var(--red);color:#fff}
 .status,.result{min-height:30px;margin-top:15px;color:var(--soft);text-align:center;line-height:1.45}.result-box{margin-top:16px;padding:18px;border-radius:16px;background:#fff4f1;text-align:left}.result-box strong{display:block;margin-bottom:9px;font-size:21px}.code{display:inline-block;margin-top:8px;color:var(--red);font-size:27px;font-weight:700}
 .manual-card,.add-card{display:none;margin-top:18px}.manual-card.show,.add-card.show{display:block}.manual-card h2,.add-card h2{margin:0 0 10px;font-size:20px}
 input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid #d8cbc7;border-radius:13px;outline-color:var(--red)}input[readonly]{background:#f7f0ee}
@@ -62,7 +62,7 @@ input{width:100%;min-height:52px;margin:7px 0;padding:12px 14px;border:1px solid
   </div>
 
   <div class="card">
-    <div id="reader"></div>
+    <div id="reader"><div id="focusMessage">Odaklanıyor...</div></div>
 
     <div class="controls">
       <button id="flashBtn" class="cam-btn" onclick="toggleFlash()"><span class="mi">flash_on</span>Flaş Aç</button>
@@ -255,8 +255,12 @@ window.saveProduct=async()=>{
 
 async function getCameraList(){
   try{
-    cameras=await Html5Qrcode.getCameras();
-    if(!Array.isArray(cameras))cameras=[];
+    const list=await Html5Qrcode.getCameras();
+    cameras=Array.isArray(list)?list:[];
+    if(currentCameraId){
+      const found=cameras.findIndex(camera=>camera.id===currentCameraId);
+      if(found>=0)cameraIndex=found;
+    }
     return cameras;
   }catch(error){
     console.error(error);
@@ -265,17 +269,75 @@ async function getCameraList(){
   }
 }
 
-function setCameraMirror(){
-  const reader=document.getElementById("reader");
-  const video=reader?.querySelector("video");
-  if(!video)return;
+async function focusCamera(event){
+  const video=document.querySelector("#reader video");
+  const track=video?.srcObject?.getVideoTracks?.()[0];
+  const status=document.getElementById("cameraStatus");
+  const message=document.getElementById("focusMessage");
 
-  const track=video.srcObject?.getVideoTracks?.()[0];
-  const facing=track?.getSettings?.().facingMode||"";
-  const camera=cameras.find(item=>item.id===currentCameraId);
-  const label=(camera?.label||"").toLowerCase();
-  const isFront=facing==="user"||/front|face|user|ön|on kamera/i.test(label);
-  reader.classList.toggle("front-camera",isFront);
+  if(!track){
+    status.textContent="Kamera henüz hazır değil.";
+    return;
+  }
+
+  const capabilities=track.getCapabilities?.() || {};
+  const settings=track.getSettings?.() || {};
+
+  if(!capabilities.focusMode && !capabilities.focusDistance){
+    status.textContent="Bu cihaz/tarayıcı dokunarak odaklamayı desteklemiyor.";
+    return;
+  }
+
+  const rect=video.getBoundingClientRect();
+  const x=Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width));
+  const y=Math.max(0,Math.min(1,(event.clientY-rect.top)/rect.height));
+
+  try{
+    const constraints={advanced:[]};
+
+    if(capabilities.focusMode?.includes("continuous")){
+      constraints.advanced.push({focusMode:"continuous"});
+    }else if(capabilities.focusMode?.includes("single-shot")){
+      constraints.advanced.push({focusMode:"single-shot"});
+    }
+
+    if(capabilities.pointsOfInterest){
+      constraints.advanced.push({pointsOfInterest:[{x:x*100,y:y*100}]});
+    }
+
+    if(constraints.advanced.length){
+      await track.applyConstraints(constraints);
+    }
+
+    message.style.left=(x*100)+"%";
+    message.style.top=(y*100)+"%";
+    message.style.opacity="1";
+    clearTimeout(window.focusMessageTimer);
+    window.focusMessageTimer=setTimeout(()=>{
+      message.style.opacity="0";
+    },700);
+
+    status.textContent="Odaklandı.";
+  }catch(error){
+    console.warn(error);
+    status.textContent="Odaklama desteklenmiyor.";
+  }
+}
+
+function attachFocusHandler(){
+  const video=document.querySelector("#reader video");
+  if(!video || video.dataset.focusAttached==="1")return;
+  video.dataset.focusAttached="1";
+  video.addEventListener("click",focusCamera);
+  video.addEventListener("touchend",event=>{
+    if(event.changedTouches?.[0]){
+      const touch=event.changedTouches[0];
+      focusCamera({
+        clientX:touch.clientX,
+        clientY:touch.clientY
+      });
+    }
+  },{passive:true});
 }
 
 async function startCamera(){
@@ -285,9 +347,9 @@ async function startCamera(){
   status.textContent="Kamera açılıyor...";
 
   try{
-    scanner=new Html5Qrcode("reader");
-
     if(!cameras.length)await getCameraList();
+
+    scanner=new Html5Qrcode("reader");
 
     let cameraConfig={facingMode:"environment"};
 
@@ -317,8 +379,8 @@ async function startCamera(){
       ()=>{}
     );
 
-    setTimeout(setCameraMirror,100);
-    status.textContent="Barkodu çerçevenin ortasında tut.";
+    setTimeout(attachFocusHandler,200);
+    status.textContent="Barkodu çerçevenin ortasında tut. Odaklamak için görüntüye dokun.";
 
     manualTimer=setTimeout(()=>{
       document.getElementById("manualCard").classList.add("show");
@@ -338,7 +400,7 @@ async function stopCamera(){
 
   const active=scanner;
   scanner=null;
-  document.getElementById("reader")?.classList.remove("front-camera");
+  document.getElementById("reader")?.querySelector("#focusMessage")?.style && (document.getElementById("focusMessage").style.opacity="0");
   flash=false;
   updateFlashButton();
 
@@ -360,26 +422,34 @@ window.restartCamera=async()=>{
 
 window.switchCamera=async()=>{
   const status=document.getElementById("cameraStatus");
-  await stopCamera();
-  clearTimeout(manualTimer);
-  lastBarcode="";
 
-  if(!cameras.length)await getCameraList();
+  try{
+    await stopCamera();
+    clearTimeout(manualTimer);
+    lastBarcode="";
 
-  if(cameras.length<2){
-    status.textContent="Bu cihazda başka kamera bulunamadı.";
+    if(!cameras.length)await getCameraList();
+
+    if(cameras.length<2){
+      status.textContent="Bu cihazda başka kamera bulunamadı.";
+      await startCamera();
+      return;
+    }
+
+    cameraIndex=(cameraIndex+1)%cameras.length;
+    currentCameraId=cameras[cameraIndex].id;
+
+    document.getElementById("scanResult").innerHTML="";
+    document.getElementById("addCard").classList.remove("show");
+    document.getElementById("manualCard").classList.remove("show");
+
+    status.textContent="Kamera değiştiriliyor...";
     await startCamera();
-    return;
+  }catch(error){
+    console.error(error);
+    status.textContent="Kamera değiştirilemedi.";
+    await startCamera();
   }
-
-  cameraIndex=(cameraIndex+1)%cameras.length;
-  currentCameraId=cameras[cameraIndex].id;
-
-  document.getElementById("scanResult").innerHTML="";
-  document.getElementById("addCard").classList.remove("show");
-  document.getElementById("manualCard").classList.remove("show");
-  status.textContent="Kamera değiştiriliyor...";
-  await startCamera();
 };
 
 function updateFlashButton(){
